@@ -1,28 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { SketchPicker } from 'react-color';
-import Canvas from './Canvas';
+import Canvas from '../containers/Canvas';
 
-export default class App extends React.Component {
+const App = props => (
+    <div className="surface" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Canvas />
+        <div style={{ marginLeft: '5px' }}> <SketchPicker color={props.brushColor} onChangeComplete={colorObject => props.setColor(colorObject.hex)} disableAlpha /> </div>
+    </div>
+);
 
-    constructor() {
-        super();
-        this.state = {
-            brushCol: '#fff',
-            erase: false,
-        };
-    }
+App.propTypes = {
+    brushColor: PropTypes.string.isRequired,
+    setColor: PropTypes.func.isRequired,
+};
 
-    handleColorPicker(color) {
-        this.setState({ brushCol: color.hex });
-    }
-
-    render() {
-        return (
-          <div className="surface" style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Canvas brushCol={this.state.erase ? '#000' : this.state.brushCol} updateColor={color => this.setState({ brushCol: color })} erase={flag => this.setState({ erase: flag })} />
-            <div style={{ marginLeft: '5px' }}> <SketchPicker color={this.state.brushCol} onChangeComplete={color => this.handleColorPicker(color)} disableAlpha /> </div>
-          </div>
-        );
-    }
-}
+export default App;

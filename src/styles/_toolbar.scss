@@ -1,0 +1,27 @@
+.toolbar {
+    display: flex;
+    align-items: center;
+    background-color: $color-mid-grey;
+    border-radius: 3px;
+    padding: 4px 0px 4px 4px;
+
+    &-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 44px;
+        width: 44px;
+        background-color: $color-dark-grey;
+        border-radius: 3px;
+        margin-right: 4px;
+
+        &-icon {
+            color: $color-mid-grey;
+
+            &__selected {
+                color: $color-white-grey;
+            }
+        }
+    }
+
+}

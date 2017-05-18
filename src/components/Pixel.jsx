@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const pixelSize = '25px';
 
@@ -9,7 +10,7 @@ Pixel.defaultProps = {
 };
 
 Pixel.propTypes = {
-    color: React.PropTypes.string,
+    color: PropTypes.string,
 };
 
 export default Pixel;

@@ -1,5 +1,8 @@
+@import './variables';
+@import './toolbar';
+
 body {
-    background-color: #202022;
+    background-color: $color-dark-grey;
     padding: 10px;
     -webkit-user-select: none;
     font-family: sans-serif;
