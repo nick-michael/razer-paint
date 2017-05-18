@@ -1,7 +1,15 @@
 import React from 'react';
+
 const pixelSize = '25px';
-export default class Pixel extends React.Component {
-  render() {
-    return <div style={{ height: pixelSize, width: pixelSize, backgroundColor: this.props.color || '#10101D' }}/>
-  }
+
+const Pixel = props => (<div style={{ height: pixelSize, width: pixelSize, border: '1px solid #202022', backgroundColor: props.color }} />);
+
+Pixel.defaultProps = {
+    color: '#000',
 };
+
+Pixel.propTypes = {
+    color: React.PropTypes.string,
+};
+
+export default Pixel;
