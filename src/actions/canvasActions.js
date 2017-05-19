@@ -5,9 +5,9 @@ export const selectTool = tool => ({
     payload: tool,
 });
 
-export const setIsPainting = (flag) => ({
+export const setIsPainting = flag => ({
     type: types.SET_IS_PAINTING,
-    payload: flag
+    payload: flag,
 });
 
 export const setColor = color => ({

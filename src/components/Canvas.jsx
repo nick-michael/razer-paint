@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Pixel from './Pixel';
-import Toolbar from './Toolbar';
-
-import { BRUSH, PICKER, ERASER } from '../constants/tools';
+import Toolbar from '../containers/Toolbar';
 
 const WIDTH = 25;
 const HEIGHT = 6;
@@ -35,28 +33,15 @@ export default class Canvas extends React.Component {
                 <div className="canvas" style={{ display: 'inline-block', cursor: 'cell' }}>
                     {pixels}
                 </div>
-                <Toolbar
-                  canUndo={this.props.canUndo}
-                  canRedo={this.props.canRedo}
-                  tool={this.props.tool}
-                  undo={() => this.props.canUndo && this.props.undo()}
-                  redo={() => this.props.canRedo && this.props.redo()}
-                  selectTool={this.props.selectTool}
-                />
+                <Toolbar />
             </div>
         );
     }
 }
 
 Canvas.propTypes = {
-    canUndo: PropTypes.bool.isRequired,
-    canRedo: PropTypes.bool.isRequired,
     frame: PropTypes.objectOf(PropTypes.string).isRequired,
-    tool: PropTypes.string.isRequired,
     handlePixelClick: PropTypes.func.isRequired,
     handleMouseOver: PropTypes.func.isRequired,
     handleMouseUp: PropTypes.func.isRequired,
-    selectTool: PropTypes.func.isRequired,
-    undo: PropTypes.func.isRequired,
-    redo: PropTypes.func.isRequired,
 };

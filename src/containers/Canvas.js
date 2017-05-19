@@ -7,13 +7,10 @@ import Canvas from '../components/Canvas';
 import { BRUSH, PICKER, ERASER } from '../constants/tools';
 
 const mapStateToProps = (state) => {
-    const { brushColor, tool, isPainting } = state.canvas;
+    const { brushColor, isPainting } = state.canvas;
     const { frame, frames, redoFrames, animate } = state.frames;
 
-    const canUndo = frames.length > 1;
-    const canRedo = redoFrames.length > 0;
-
-    return { canUndo, canRedo, brushColor, tool, isPainting, frame, frames, redoFrames, animate };
+    return { brushColor, isPainting, frame, frames, redoFrames, animate };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -42,13 +39,12 @@ const mergeProps = (stateProps, dispatchProps) => {
         toolClickMap[stateProps.tool] && toolClickMap[stateProps.tool](pixel);
     };
     const handleMouseOver = (pixel) => {
-        stateProps.isPainting &&
-        paintPixel(pixel);
+        stateProps.isPainting && paintPixel(pixel);
     };
     const handleMouseUp = () => {
         stateProps.isPainting &&
         dispatchProps.setIsPainting(false) &&
-        dispatchProps.keyframe()
+        dispatchProps.keyframe();
     };
 
     const mergedProps = {
@@ -59,9 +55,6 @@ const mergeProps = (stateProps, dispatchProps) => {
         handlePixelClick,
         handleMouseOver,
         handleMouseUp,
-        selectTool: dispatchProps.selectTool,
-        undo: dispatchProps.undo,
-        redo: dispatchProps.redo,
     };
 
     return { ...mergedProps };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { SketchPicker, ChromePicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import Canvas from '../containers/Canvas';
 
 const App = props => (

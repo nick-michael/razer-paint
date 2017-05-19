@@ -8,4 +8,4 @@ export const UNDO = 'UNDO';
 export const REDO = 'REDO';
 export const PAINT_FRAME = 'PAINT_FRAME';
 export const KEYFRAME = 'KEYFRAME';
-export const CPATURE = 'CPATURE';
+export const CAPTURE = 'CAPTURE';

@@ -8,18 +8,14 @@ import Toolbar from '../components/Toolbar';
 const mapStateToProps = (state) => {
     const { tool } = state.canvas;
     const { frames, redoFrames, animate } = state.frames;
-    const canUndo = this.props.frames.length > 1;
-    const canRedo = this.props.redoFrames.length > 0;
-    return { tool, frames, redoFrames, animate };
+    const canUndo = frames.length > 1;
+    const canRedo = redoFrames.length > 0;
+    return { tool, canUndo, canRedo, animate };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(
     { ...canvasActions, ...frameActions },
     dispatch,
 );
-
-const mergeProps = (stateProps, dispatchProps) => {
-
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);
