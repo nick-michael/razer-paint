@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     background-color: $color-mid-grey;
-    border-radius: 3px;
+    border-radius: 2px;
     padding: 4px 0px 4px 4px;
 
     &-item {
@@ -12,7 +12,7 @@
         height: 44px;
         width: 44px;
         background-color: $color-dark-grey;
-        border-radius: 3px;
+        border-radius: 2px;
         margin-right: 4px;
 
         &-icon {

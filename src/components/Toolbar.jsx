@@ -7,10 +7,10 @@ import { BRUSH, PICKER, ERASER } from '../constants/tools';
 const Toolbar = props => (
     <div className="toolbar">
         <div className="toolbar-item" onMouseUp={() => props.undo()}>
-            <FontAwesome className={`toolbar-item-icon${props.frames.length > 1 ? '__selected' : ''}`} size="2x" name="undo" />
+            <FontAwesome className={`toolbar-item-icon${props.canUndo ? '__selected' : ''}`} size="2x" name="undo" />
         </div>
         <div className="toolbar-item" onMouseUp={() => props.redo()}>
-            <FontAwesome className={`toolbar-item-icon${props.redoFrames.length > 0 ? '__selected' : ''}`} size="2x" name="repeat" />
+            <FontAwesome className={`toolbar-item-icon${props.canRedo ? '__selected' : ''}`} size="2x" name="repeat" />
         </div>
         <div className="toolbar-item" onMouseUp={() => props.selectTool(BRUSH)}>
             <FontAwesome className={`toolbar-item-icon${props.tool === BRUSH ? '__selected' : ''}`} size="2x" name="paint-brush" />
@@ -21,13 +21,16 @@ const Toolbar = props => (
         <div className="toolbar-item" onMouseUp={() => props.selectTool(ERASER)}>
             <FontAwesome className={`toolbar-item-icon${props.tool === ERASER ? '__selected' : ''}`} size="2x" name="eraser" />
         </div>
+        <div className="toolbar-item" onMouseUp={() => props.selectTool(ERASER)}>
+            <FontAwesome className={'toolbar-item-icon__selected'} size="2x" name="camera" />
+        </div>
     </div>
 );
 
 Toolbar.propTypes = {
     tool: PropTypes.string.isRequired,
-    frames: PropTypes.arrayOf(PropTypes.object).isRequired,
-    redoFrames: PropTypes.arrayOf(PropTypes.object).isRequired,
+    canUndo: PropTypes.bool.isRequired,
+    canRedo: PropTypes.bool.isRequired,
     undo: PropTypes.func.isRequired,
     redo: PropTypes.func.isRequired,
     selectTool: PropTypes.func.isRequired,

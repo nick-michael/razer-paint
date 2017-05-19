@@ -10,54 +10,12 @@ const WIDTH = 25;
 const HEIGHT = 6;
 
 export default class Canvas extends React.Component {
-    constructor() {
-        super();
-        this.isPainting = false;
-    }
-
     componentDidMount() {
-        window.addEventListener('mouseup', () => this.handleMouseUp());
-    }
-
-    setIsPainting(flag) {
-        this.isPainting = flag;
-    }
-
-    handleMouseUp() {
-        if (this.isPainting) {
-            this.setIsPainting(false);
-            this.props.keyframe();
-        }
-    }
-
-    toolClickMap = {
-        [BRUSH]: pixel => this.paintPixel(pixel),
-        [ERASER]: pixel => this.paintPixel(pixel),
-        [PICKER]: pixel => this.pickPixel(pixel),
-    };
-
-    paintPixel(pixel) {
-        this.setIsPainting(true);
-        const newFrame = Object.assign({}, this.props.frame);
-        newFrame[`${pixel}`] = this.props.tool === ERASER ? '#000' : this.props.brushColor;
-        this.props.paintFrame(newFrame);
-    }
-
-    pickPixel(pixel) {
-        this.props.setColor(this.props.frame[pixel]);
-        this.props.selectTool(BRUSH);
-    }
-
-    handleMouseOver(pixel) {
-        if (this.isPainting) {
-            const newFrame = Object.assign({}, this.props.frame);
-            newFrame[`${pixel}`] = this.props.tool === ERASER ? '#000' : this.props.brushColor;
-            this.props.paintFrame(newFrame);
-        }
+        window.addEventListener('mouseup', () => this.props.handleMouseUp());
     }
 
     makePixel(count) {
-        return (<div key={count} onMouseDown={() => this.toolClickMap[this.props.tool] && this.toolClickMap[this.props.tool](`${count}`)} onMouseOver={() => this.handleMouseOver(`${count}`)}><Pixel color={this.props.frame[`${count}`]} /></div>);
+        return (<div key={count} onMouseDown={() => this.props.handlePixelClick(`${count}`)} onMouseOver={() => this.props.handleMouseOver(`${count}`)}><Pixel color={this.props.frame[`${count}`]} /></div>);
     }
 
     render() {
@@ -78,11 +36,11 @@ export default class Canvas extends React.Component {
                     {pixels}
                 </div>
                 <Toolbar
-                  frames={this.props.frames}
-                  redoFrames={this.props.redoFrames}
+                  canUndo={this.props.canUndo}
+                  canRedo={this.props.canRedo}
                   tool={this.props.tool}
-                  undo={() => (this.props.frames.length > 1) && this.props.undo()}
-                  redo={() => (this.props.redoFrames.length > 0) && this.props.redo()}
+                  undo={() => this.props.canUndo && this.props.undo()}
+                  redo={() => this.props.canRedo && this.props.redo()}
                   selectTool={this.props.selectTool}
                 />
             </div>
@@ -91,15 +49,14 @@ export default class Canvas extends React.Component {
 }
 
 Canvas.propTypes = {
-    brushColor: PropTypes.string.isRequired,
-    tool: PropTypes.string.isRequired,
+    canUndo: PropTypes.bool.isRequired,
+    canRedo: PropTypes.bool.isRequired,
     frame: PropTypes.objectOf(PropTypes.string).isRequired,
-    frames: PropTypes.arrayOf(PropTypes.object).isRequired,
-    redoFrames: PropTypes.arrayOf(PropTypes.object).isRequired,
+    tool: PropTypes.string.isRequired,
+    handlePixelClick: PropTypes.func.isRequired,
+    handleMouseOver: PropTypes.func.isRequired,
+    handleMouseUp: PropTypes.func.isRequired,
+    selectTool: PropTypes.func.isRequired,
     undo: PropTypes.func.isRequired,
     redo: PropTypes.func.isRequired,
-    paintFrame: PropTypes.func.isRequired,
-    keyframe: PropTypes.func.isRequired,
-    setColor: PropTypes.func.isRequired,
-    selectTool: PropTypes.func.isRequired,
 };

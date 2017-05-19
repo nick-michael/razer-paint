@@ -4,11 +4,16 @@ import { bindActionCreators } from 'redux';
 import * as canvasActions from '../actions/canvasActions';
 import * as frameActions from '../actions/frameActions';
 import Canvas from '../components/Canvas';
+import { BRUSH, PICKER, ERASER } from '../constants/tools';
 
 const mapStateToProps = (state) => {
-    const { brushColor, tool } = state.canvas;
+    const { brushColor, tool, isPainting } = state.canvas;
     const { frame, frames, redoFrames, animate } = state.frames;
-    return { brushColor, tool, frame, frames, redoFrames, animate };
+
+    const canUndo = frames.length > 1;
+    const canRedo = redoFrames.length > 0;
+
+    return { canUndo, canRedo, brushColor, tool, isPainting, frame, frames, redoFrames, animate };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -16,4 +21,50 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     dispatch,
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Canvas);
+const mergeProps = (stateProps, dispatchProps) => {
+    const paintPixel = (pixel) => {
+        const newFrame = Object.assign({}, stateProps.frame);
+        newFrame[`${pixel}`] = stateProps.tool === ERASER ? '#000' : stateProps.brushColor;
+        dispatchProps.paintFrame(newFrame);
+    };
+
+    const pickPixel = (pixel) => {
+        dispatchProps.setColor(stateProps.frame[pixel]);
+        dispatchProps.selectTool(BRUSH);
+    };
+    const toolClickMap = {
+        [BRUSH]: pixel => paintPixel(pixel),
+        [ERASER]: pixel => paintPixel(pixel),
+        [PICKER]: pixel => pickPixel(pixel),
+    };
+    const handlePixelClick = (pixel) => {
+        dispatchProps.setIsPainting(true);
+        toolClickMap[stateProps.tool] && toolClickMap[stateProps.tool](pixel);
+    };
+    const handleMouseOver = (pixel) => {
+        stateProps.isPainting &&
+        paintPixel(pixel);
+    };
+    const handleMouseUp = () => {
+        stateProps.isPainting &&
+        dispatchProps.setIsPainting(false) &&
+        dispatchProps.keyframe()
+    };
+
+    const mergedProps = {
+        canUndo: stateProps.canUndo,
+        canRedo: stateProps.canRedo,
+        frame: stateProps.frame,
+        tool: stateProps.tool,
+        handlePixelClick,
+        handleMouseOver,
+        handleMouseUp,
+        selectTool: dispatchProps.selectTool,
+        undo: dispatchProps.undo,
+        redo: dispatchProps.redo,
+    };
+
+    return { ...mergedProps };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Canvas);
