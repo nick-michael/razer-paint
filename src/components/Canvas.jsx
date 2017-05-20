@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import Pixel from './Pixel';
 import Toolbar from '../containers/Toolbar';
-
-const WIDTH = 25;
-const HEIGHT = 6;
+import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../utils/frame';
 
 export default class Canvas extends React.Component {
     componentDidMount() {
@@ -19,9 +17,9 @@ export default class Canvas extends React.Component {
     render() {
         const pixels = [];
         let count = 0;
-        for (let i = 0; i < HEIGHT; i += 1) {
+        for (let i = 0; i < CANVAS_HEIGHT; i += 1) {
             const row = [];
-            for (let j = 0; j < WIDTH; j += 1) {
+            for (let j = 0; j < CANVAS_WIDTH; j += 1) {
                 row.push(this.makePixel(count));
                 count += 1;
             }

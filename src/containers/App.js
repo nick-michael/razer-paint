@@ -6,7 +6,8 @@ import App from '../components/App';
 
 const mapStateToProps = (state) => {
     const { brushColor } = state.canvas;
-    return { brushColor };
+    const { animate } = state.frames;
+    return { brushColor, animate };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({ setColor }, dispatch);

@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
-import initializeFrame from '../utils/frame';
+import { initializeFrame } from '../utils/frame';
 
-const frame = initializeFrame(25, 6);
+const frame = initializeFrame();
 const defaultState = {
     frame,
     frames: [frame],

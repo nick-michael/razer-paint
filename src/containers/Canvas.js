@@ -7,10 +7,10 @@ import Canvas from '../components/Canvas';
 import { BRUSH, PICKER, ERASER } from '../constants/tools';
 
 const mapStateToProps = (state) => {
-    const { brushColor, isPainting } = state.canvas;
+    const { tool, brushColor, isPainting } = state.canvas;
     const { frame, frames, redoFrames, animate } = state.frames;
 
-    return { brushColor, isPainting, frame, frames, redoFrames, animate };
+    return { tool, brushColor, isPainting, frame, frames, redoFrames, animate };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(
