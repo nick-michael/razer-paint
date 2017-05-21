@@ -6,32 +6,34 @@ import { BRUSH, PICKER, ERASER } from '../constants/tools';
 
 const Toolbar = props => (
     <div className="toolbar">
-        <div className="toolbar-item" onMouseUp={() => props.canUndo && props.undo()}>
-            <FontAwesome className={`toolbar-item-icon${props.canUndo ? '__selected' : ''}`} size="2x" name="undo" />
-        </div>
-        <div className="toolbar-item" onMouseUp={() => props.canRedo && props.redo()}>
-            <FontAwesome className={`toolbar-item-icon${props.canRedo ? '__selected' : ''}`} size="2x" name="repeat" />
-        </div>
         <div className="toolbar-item" onMouseUp={() => props.selectTool(BRUSH)}>
-            <FontAwesome className={`toolbar-item-icon${props.tool === BRUSH ? '__selected' : ''}`} size="2x" name="paint-brush" />
+            <FontAwesome className={`toolbar-item-icon${props.tool === BRUSH ? '__selected' : ''}`} name="paint-brush" />
         </div>
         <div className="toolbar-item" onMouseUp={() => props.selectTool(PICKER)}>
-            <FontAwesome className={`toolbar-item-icon${props.tool === PICKER ? '__selected' : ''}`} size="2x" name="eyedropper" />
+            <FontAwesome className={`toolbar-item-icon${props.tool === PICKER ? '__selected' : ''}`} name="eyedropper" />
         </div>
         <div className="toolbar-item" onMouseUp={() => props.selectTool(ERASER)}>
-            <FontAwesome className={`toolbar-item-icon${props.tool === ERASER ? '__selected' : ''}`} size="2x" name="eraser" />
+            <FontAwesome className={`toolbar-item-icon${props.tool === ERASER ? '__selected' : ''}`} name="eraser" />
         </div>
+        <div className="toolbar-spacer" />
+        <div className="toolbar-item" onMouseUp={() => props.canUndo && props.undo()}>
+            <FontAwesome className={`toolbar-item-icon${props.canUndo ? '__selected' : ''}`} name="undo" />
+        </div>
+        <div className="toolbar-item" onMouseUp={() => props.canRedo && props.redo()}>
+            <FontAwesome className={`toolbar-item-icon${props.canRedo ? '__selected' : ''}`} name="repeat" />
+        </div>
+        <div className="toolbar-spacer" />
         <div className="toolbar-item" onMouseUp={props.capture}>
-            <FontAwesome className={'toolbar-item-icon__selected'} size="2x" name="camera" />
+            <FontAwesome className={'toolbar-item-icon__selected'} name="camera" />
         </div>
-        <div className="toolbar-item" onMouseUp={props.insertFrame}>
-            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} size="2x" name="level-down" />
+        <div className="toolbar-item" onMouseUp={typeof props.selectedFrame === 'number' && props.insertFrame}>
+            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} name="level-down" />
         </div>
-        <div className="toolbar-item" onMouseUp={props.loadFrame}>
-            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} size="2x" name="level-up" />
+        <div className="toolbar-item" onMouseUp={typeof props.selectedFrame === 'number' && props.loadFrame}>
+            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} name="level-up" />
         </div>
-        <div className="toolbar-item" onMouseUp={props.deleteFrame}>
-            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} size="2x" name="trash" />
+        <div className="toolbar-item" onMouseUp={typeof props.selectedFrame === 'number' && props.deleteFrame}>
+            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} name="trash" />
         </div>
     </div>
 );
