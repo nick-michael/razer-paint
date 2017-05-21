@@ -20,3 +20,20 @@ export const keyframe = () => ({
 export const capture = () => ({
     type: types.CAPTURE,
 });
+
+export const selectAnimationFrame = index => ({
+    type: types.SELECT_ANIMATION_FRAME,
+    payload: index,
+});
+
+export const deleteFrame = () => ({
+    type: types.DELETE_FRAME,
+});
+
+export const insertFrame = () => ({
+    type: types.INSERT_FRAME,
+});
+
+export const loadFrame = () => ({
+    type: types.LOAD_FRAME,
+});

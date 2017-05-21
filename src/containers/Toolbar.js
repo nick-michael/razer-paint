@@ -7,10 +7,10 @@ import Toolbar from '../components/Toolbar';
 
 const mapStateToProps = (state) => {
     const { tool } = state.canvas;
-    const { frames, redoFrames, animate } = state.frames;
+    const { frames, redoFrames, animate, selectedFrame } = state.frames;
     const canUndo = frames.length > 1;
     const canRedo = redoFrames.length > 0;
-    return { tool, canUndo, canRedo, animate };
+    return { tool, canUndo, canRedo, animate, selectedFrame };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(

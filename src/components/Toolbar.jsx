@@ -24,6 +24,15 @@ const Toolbar = props => (
         <div className="toolbar-item" onMouseUp={props.capture}>
             <FontAwesome className={'toolbar-item-icon__selected'} size="2x" name="camera" />
         </div>
+        <div className="toolbar-item" onMouseUp={props.insertFrame}>
+            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} size="2x" name="level-down" />
+        </div>
+        <div className="toolbar-item" onMouseUp={props.loadFrame}>
+            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} size="2x" name="level-up" />
+        </div>
+        <div className="toolbar-item" onMouseUp={props.deleteFrame}>
+            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} size="2x" name="trash" />
+        </div>
     </div>
 );
 
@@ -31,10 +40,14 @@ Toolbar.propTypes = {
     tool: PropTypes.string.isRequired,
     canUndo: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,
+    selectedFrame: PropTypes.number.isRequired,
     undo: PropTypes.func.isRequired,
     redo: PropTypes.func.isRequired,
     capture: PropTypes.func.isRequired,
     selectTool: PropTypes.func.isRequired,
+    insertFrame: PropTypes.func.isRequired,
+    loadFrame: PropTypes.func.isRequired,
+    deleteFrame: PropTypes.func.isRequired,
 };
 
 export default Toolbar;

@@ -7,6 +7,7 @@ const defaultState = {
     frames: [frame],
     redoFrames: [],
     animate: [],
+    selectedFrame: null,
 };
 
 export default (state = defaultState, action) => {
@@ -31,6 +32,29 @@ export default (state = defaultState, action) => {
             return { ...state, frames: state.frames.concat(state.frame) };
         case types.CAPTURE:
             return { ...state, animate: state.animate.concat(state.frame) };
+        case types.SELECT_ANIMATION_FRAME:
+            return { ...state, selectedFrame: action.payload };
+        case types.DELETE_FRAME:
+            return { ...state,
+                animate: state.animate.filter((e, i) => (i !== state.selectedFrame)),
+                selectedFrame: state.selectedFrame >= state.animate.length - 1
+                    ? null
+                    : state.selectedFrame,
+            };
+        case types.INSERT_FRAME:
+            return {
+                ...state,
+                animate: [
+                    ...state.animate.slice(0, state.selectedFrame + 1),
+                    state.frame,
+                    ...state.animate.slice(state.selectedFrame + 1)],
+            };
+        case types.LOAD_FRAME:
+            return {
+                ...state,
+                frame: state.animate[state.selectedFrame],
+                frames: state.frames.concat(state.frame),
+            };
         default:
             return state;
     }

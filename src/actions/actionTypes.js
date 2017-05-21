@@ -9,3 +9,7 @@ export const REDO = 'REDO';
 export const PAINT_FRAME = 'PAINT_FRAME';
 export const KEYFRAME = 'KEYFRAME';
 export const CAPTURE = 'CAPTURE';
+export const SELECT_ANIMATION_FRAME = 'SELECT_ANIMATION_FRAME';
+export const DELETE_FRAME = 'DELETE_FRAME';
+export const INSERT_FRAME = 'INSERT_FRAME';
+export const LOAD_FRAME = 'LOAD_FRAME';
