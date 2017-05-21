@@ -13,3 +13,6 @@ export const SELECT_ANIMATION_FRAME = 'SELECT_ANIMATION_FRAME';
 export const DELETE_FRAME = 'DELETE_FRAME';
 export const INSERT_FRAME = 'INSERT_FRAME';
 export const LOAD_FRAME = 'LOAD_FRAME';
+export const LOAD_FILE = 'LOAD_FILE';
+export const SET_IS_PLAYING = 'SET_IS_PLAYING';
+export const SET_FPS = 'SET_FPS';

@@ -33,4 +33,40 @@
         width: 2px;
     }
 
+    &-slider {
+        background: $color-dark-grey;
+        border-radius: 2px;
+        display: flex;
+        flex-direction: column;
+        height: 35px;
+        justify-content: center;
+    }
+
+    &-slider-value {
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 0.8em;
+        margin-bottom: 3px;
+    }
+
+    &-slider-input {
+        height: 6px;
+        border-radius: 3px;
+        -webkit-appearance: none;
+        background-color: #3A3A3D;
+    }
+    
+    
+    &-slider-input:focus {
+        outline: none;
+    }
+
+    &-slider-input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 10px;
+        width: 10px;
+        border-radius: 5px;
+        background: #FFF;
+    }
+
 }

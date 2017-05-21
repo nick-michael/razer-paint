@@ -9,7 +9,7 @@ let mainWindow = null;
 app.on('ready', () => {
   // creates a new browser window
     mainWindow = new BrowserWindow({
-        width: 950,
+        width: 960,
         height: 442,
         resizable: process.env.NODE_ENV === 'development',
     });

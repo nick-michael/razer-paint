@@ -8,6 +8,8 @@ const defaultState = {
     redoFrames: [],
     animate: [],
     selectedFrame: null,
+    fps: 30,
+    isPlaying: false,
 };
 
 export default (state = defaultState, action) => {
@@ -55,6 +57,22 @@ export default (state = defaultState, action) => {
                 frame: state.animate[state.selectedFrame],
                 frames: state.frames.concat(state.frame),
             };
+        case types.LOAD_FILE:
+            return {
+                ...state,
+                ...action.payload,
+            }
+        case types.SET_IS_PLAYING:
+            return {
+                ...state,
+                isPlaying: action.payload,
+            }
+        case types.SET_FPS:
+        console.log('setting: ', action.payload);
+            return {
+                ...state,
+                fps: action.payload,
+            }
         default:
             return state;
     }

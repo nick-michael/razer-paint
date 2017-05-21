@@ -23,7 +23,7 @@ class Animate extends React.Component {
 
     createFrames() {
         return this.props.frames.map((frame, index) => (
-            <div style={{ margin: '4px 0 4px 4px', display: 'table', border: `${this.props.selectedFrame === index ? 'solid 2px #00BAFF' : ''}` }} onClick={() => this.props.selectAnimationFrame(index)}>
+            <div className={`frame${this.props.selectedFrame === index ? ' frame__selected' : ''}`} onClick={() => this.props.selectAnimationFrame(index)}>
                 <canvas ref={(c) => { this[`animate-frame-${index}`] = c; }} id={`animate-frame-${index}`} width={CANVAS_WIDTH * PIXEL_SIZE} height={CANVAS_HEIGHT * PIXEL_SIZE} />
                 <div style={{ textAlign: 'center', color: '#FFF' }}>
                     {index + 1}

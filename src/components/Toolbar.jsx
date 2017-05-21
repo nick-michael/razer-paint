@@ -4,6 +4,8 @@ import FontAwesome from 'react-fontawesome';
 
 import { BRUSH, PICKER, ERASER } from '../constants/tools';
 
+import { saveFile, loadFile } from '../utils/fileStytem';
+
 const Toolbar = props => (
     <div className="toolbar">
         <div className="toolbar-item" onMouseUp={() => props.selectTool(BRUSH)}>
@@ -34,6 +36,31 @@ const Toolbar = props => (
         </div>
         <div className="toolbar-item" onMouseUp={typeof props.selectedFrame === 'number' && props.deleteFrame}>
             <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} name="trash" />
+        </div>
+        <div className="toolbar-spacer" />
+        <div className="toolbar-item" onMouseUp={() => saveFile(JSON.stringify(props.saveState))}>
+            <FontAwesome className={'toolbar-item-icon__selected'} name="floppy-o" />
+        </div>
+        <div className="toolbar-item" onMouseUp={() => loadFile(props.loadFile)}>
+            <FontAwesome className={'toolbar-item-icon__selected'} name="folder-open" />
+        </div>
+        <div className="toolbar-spacer" />
+        <div className="toolbar-item" onMouseUp={props.isPlaying ? props.animate.length > 0 && props.pauseAnimation : props.animate.length > 0 && props.playAnimation}>
+            <FontAwesome className={`toolbar-item-icon${props.animate.length > 0 ? '__selected' : ''}`} name={props.isPlaying ? 'pause' : 'play'} />
+        </div>
+        <div className="toolbar-slider">
+            <div className="toolbar-slider-value">
+                fps: {props.fps}
+            </div>
+            <input
+                className="toolbar-slider-input"
+                type="range"
+                max={60}
+                min={1}
+                value={props.fps}
+                onMouseUp={e => props.updateFps(e.target.value)}
+                onChange={e => props.setFps(e.target.value)}
+            />
         </div>
     </div>
 );

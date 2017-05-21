@@ -55,6 +55,8 @@ const mergeProps = (stateProps, dispatchProps) => {
         handlePixelClick,
         handleMouseOver,
         handleMouseUp,
+        paintFrame: dispatchProps.paintFrame,
+        animate: stateProps.animate,
     };
 
     return { ...mergedProps };

@@ -37,3 +37,18 @@ export const insertFrame = () => ({
 export const loadFrame = () => ({
     type: types.LOAD_FRAME,
 });
+
+export const loadFile = (snapshot) => ({
+    type: types.LOAD_FILE,
+    payload: snapshot,
+});
+
+export const setIsPlaying = (flag) => ({
+    type: types.SET_IS_PLAYING,
+    payload: flag,
+});
+
+export const setFps = (fps) => ({
+    type: types.SET_FPS,
+    payload: fps,
+});
