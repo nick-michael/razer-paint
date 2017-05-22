@@ -1,0 +1,57 @@
+.topBar {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 100%;
+    background: $color-mid-grey;
+    -webkit-app-region: drag;
+    color: white;
+    font-size: 0.9em;
+
+    .label {
+        line-height: 24px;
+        position: absolute;
+        transform: translateX(-50%);
+    }
+
+    .button-container {
+        padding: 0 10px;
+        height: 24px;
+
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-app-region: no-drag;
+            width: 14px;
+            height: 14px;
+            border-radius: 7px;
+            margin: 5px 2px;
+
+            .button-icon {
+                transform: scale(0.8);
+            }
+        }
+
+        .button-close {
+            background: #FF645B;
+            color: #FF645B;
+
+            &:hover {
+                color: #BF341B;
+            }
+        }
+
+        .button-minimize {
+            background: #FFC430;
+            color: #FFC430;
+
+            &:hover {
+                color: #BF9400
+            }
+        }
+
+    }
+}

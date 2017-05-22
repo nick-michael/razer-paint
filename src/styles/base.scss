@@ -1,10 +1,12 @@
 @import './variables';
 @import './toolbar';
 @import './animate';
+@import './topBar';
+@import './canvas';
 
 body {
     background-color: $color-dark-grey;
-    padding: 10px;
-    -webkit-user-select: none;
+    padding: 30px 10px 10px 10px;
+    user-select: none;
     font-family: sans-serif;
 }

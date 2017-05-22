@@ -29,18 +29,21 @@ const mergeProps = (stateProps, dispatchProps) => {
         dispatchProps.setColor(stateProps.frame[pixel]);
         dispatchProps.selectTool(BRUSH);
     };
+
     const toolClickMap = {
         [BRUSH]: pixel => paintPixel(pixel),
         [ERASER]: pixel => paintPixel(pixel),
         [PICKER]: pixel => pickPixel(pixel),
     };
+
     const handlePixelClick = (pixel) => {
-        dispatchProps.setIsPainting(true);
         toolClickMap[stateProps.tool] && toolClickMap[stateProps.tool](pixel);
     };
+
     const handleMouseOver = (pixel) => {
         stateProps.isPainting && paintPixel(pixel);
     };
+
     const handleMouseUp = () => {
         stateProps.isPainting &&
         dispatchProps.setIsPainting(false) &&
@@ -56,6 +59,7 @@ const mergeProps = (stateProps, dispatchProps) => {
         handleMouseOver,
         handleMouseUp,
         paintFrame: dispatchProps.paintFrame,
+        setIsPainting: dispatchProps.setIsPainting,
         animate: stateProps.animate,
     };
 

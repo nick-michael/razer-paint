@@ -23,12 +23,12 @@ export default class Canvas extends React.Component {
                 row.push(this.makePixel(count));
                 count += 1;
             }
-            pixels.push(<div key={i} className={'row'} style={{ display: 'flex' }}>{row}</div>);
+            pixels.push(<div key={i} className={`row row-${i}`}>{row}</div>);
         }
 
         return (
             <div>
-                <div className="canvas" style={{ display: 'inline-block', cursor: 'cell' }}>
+                <div className="canvas" onMouseDown={() => this.props.setIsPainting(true)}>
                     {pixels}
                 </div>
                 <Toolbar />

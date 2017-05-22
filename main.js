@@ -12,6 +12,7 @@ app.on('ready', () => {
         width: 960,
         height: 442,
         resizable: process.env.NODE_ENV === 'development',
+        frame: false,
     });
   // load the file
     mainWindow.loadURL('http://localhost:8081/');

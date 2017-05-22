@@ -10,11 +10,11 @@ let count = 0;
 
 const mapStateToProps = (state) => {
     const { tool } = state.canvas;
-    const { frames, redoFrames, animate, selectedFrame, fps, isPlaying } = state.frames;
+    const { frame, frames, redoFrames, animate, selectedFrame, fps, isPlaying } = state.frames;
     const canUndo = frames.length > 1;
     const canRedo = redoFrames.length > 0;
-    
-    return { tool, canUndo, canRedo, animate, selectedFrame, fps, isPlaying, saveState: state.frames };
+    const saveState = { frame, animate, fps };
+    return { tool, canUndo, canRedo, animate, selectedFrame, fps, isPlaying, saveState };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(
