@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { frameToPicture, CANVAS_WIDTH, CANVAS_HEIGHT } from '../utils/frame';
 
-const PIXEL_SIZE = 5;
+const PIXEL_SIZE = 4;
 
 class Animate extends React.Component {
 
@@ -34,7 +34,7 @@ class Animate extends React.Component {
 
     render() {
         return (
-            <div className="frames" style={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px', height: '140px', border: '2px solid #3a3a3d', overflowY: 'scroll' }}>
+            <div className="frames" style={{ padding: '2px', display: 'flex', flexWrap: 'wrap', marginTop: '15px', height: '140px', border: '2px solid #3a3a3d', overflowY: 'scroll' }}>
                 {this.createFrames()}
             </div>
         );

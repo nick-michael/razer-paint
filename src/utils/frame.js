@@ -1,4 +1,4 @@
-export const CANVAS_WIDTH = 25;
+export const CANVAS_WIDTH = 23;
 export const CANVAS_HEIGHT = 6;
 
 export const initializeFrame = (width = CANVAS_WIDTH, height = CANVAS_HEIGHT) => {
