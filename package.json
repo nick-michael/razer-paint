@@ -1,7 +1,7 @@
 {
-  "name": "electon-react-boilerplate",
+  "name": "razer-paint",
   "version": "0.0.1",
-  "description": "Electron React Boilerplate",
+  "description": "Razer Paint For Chroma",
   "main": "main.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development npm-run-all --parallel --race _build:watch _serve start:electron",
@@ -13,23 +13,18 @@
     "lint": "eslint **/ --ext .jsx,.js --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:vutran/electron-webpack-boilerplate.git"
+  "dependencies": {
+    "cross-env": "^5.0.0",
+    "electron": "^1.6.8",
+    "prop-types": "^15.5.10",
+    "react": "15.5.4",
+    "react-color": "^2.11.7",
+    "react-dom": "^15.5.4",
+    "react-fontawesome": "^1.6.1",
+    "react-redux": "^5.0.5",
+    "reactcss": "1.2.0",
+    "redux": "^3.6.0"
   },
-  "keywords": [
-    "electron",
-    "webpack",
-    "react",
-    "boilerplate",
-    "node"
-  ],
-  "author": "Vu Tran",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vutran/electron-react-boilerplate/issues"
-  },
-  "homepage": "https://github.com/vutran/electron-react-boilerplate#readme",
   "devDependencies": {
     "babel-core": "^6.18.0",
     "babel-eslint": "^7.1.0",
@@ -63,16 +58,20 @@
     "webpack": "^1.13.2",
     "webpack-target-electron-renderer": "^0.3.0"
   },
-  "dependencies": {
-    "cross-env": "^5.0.0",
-    "electron": "^1.6.8",
-    "prop-types": "^15.5.10",
-    "react": "15.5.4",
-    "react-color": "^2.11.7",
-    "react-dom": "^15.5.4",
-    "react-fontawesome": "^1.6.1",
-    "react-redux": "^5.0.5",
-    "reactcss": "1.2.0",
-    "redux": "^3.6.0"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nick-michael/razer-paint.git"
+  },
+  "keywords": [
+    "razer",
+    "chroma",
+    "electron",
+    "paint"
+  ],
+  "author": "Nick Michael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nick-michael/razer-paint/issues"
+  },
+  "homepage": "https://github.com/nick-michael/razer-paint#readme"
 }
