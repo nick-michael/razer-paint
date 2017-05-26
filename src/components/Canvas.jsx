@@ -42,4 +42,5 @@ Canvas.propTypes = {
     handlePixelClick: PropTypes.func.isRequired,
     handleMouseOver: PropTypes.func.isRequired,
     handleMouseUp: PropTypes.func.isRequired,
+    setIsPainting: PropTypes.func.isRequired,
 };

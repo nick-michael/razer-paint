@@ -31,7 +31,7 @@ const mergeProps = (stateProps, dispatchProps) => {
             }
             dispatchProps.paintFrame(stateProps.animate[count]);
             count += 1;
-        }, 1000/stateProps.fps);
+        }, 1000 / stateProps.fps);
     };
 
     const updateFps = (fps) => {
@@ -43,7 +43,7 @@ const mergeProps = (stateProps, dispatchProps) => {
                 }
                 dispatchProps.paintFrame(stateProps.animate[count]);
                 count += 1;
-            }, 1000/fps);
+            }, 1000 / fps);
         }
     };
 
@@ -51,7 +51,7 @@ const mergeProps = (stateProps, dispatchProps) => {
         dispatchProps.setIsPlaying(false);
         clearInterval(interval);
     };
-    return { ...stateProps, ...dispatchProps, playAnimation, pauseAnimation, updateFps }
+    return { ...stateProps, ...dispatchProps, playAnimation, pauseAnimation, updateFps };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Toolbar);

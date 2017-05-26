@@ -2,7 +2,7 @@ import * as os from 'os';
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { remote, ipcRenderer } from 'electron';
+import { remote } from 'electron';
 
 import { ChromePicker } from 'react-color';
 import FontAwesome from 'react-fontawesome';

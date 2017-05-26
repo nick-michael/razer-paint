@@ -61,18 +61,18 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 ...action.payload,
-            }
+            };
         case types.SET_IS_PLAYING:
             return {
                 ...state,
                 isPlaying: action.payload,
-            }
+            };
         case types.SET_FPS:
-        console.log('setting: ', action.payload);
+            console.log('setting: ', action.payload);
             return {
                 ...state,
                 fps: action.payload,
-            }
+            };
         default:
             return state;
     }

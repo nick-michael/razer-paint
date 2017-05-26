@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome';
 
 import { BRUSH, PICKER, ERASER } from '../constants/tools';
 
-import { saveFile, loadFile } from '../utils/fileStytem';
+import { saveFile, openFile } from '../utils/fileStytem';
 
 const Toolbar = props => (
     <div className="toolbar">
@@ -41,7 +41,7 @@ const Toolbar = props => (
         <div className="toolbar-item" onMouseUp={() => saveFile(JSON.stringify(props.saveState))}>
             <FontAwesome className={'toolbar-item-icon__selected'} name="floppy-o" />
         </div>
-        <div className="toolbar-item" onMouseUp={() => loadFile(props.loadFile)}>
+        <div className="toolbar-item" onMouseUp={() => openFile(props.loadFile)}>
             <FontAwesome className={'toolbar-item-icon__selected'} name="folder-open" />
         </div>
         <div className="toolbar-spacer" />
@@ -53,13 +53,13 @@ const Toolbar = props => (
                 fps: {props.fps}
             </div>
             <input
-                className="toolbar-slider-input"
-                type="range"
-                max={60}
-                min={1}
-                value={props.fps}
-                onMouseUp={e => props.updateFps(e.target.value)}
-                onChange={e => props.setFps(e.target.value)}
+              className="toolbar-slider-input"
+              type="range"
+              max={60}
+              min={1}
+              value={props.fps}
+              onMouseUp={e => props.updateFps(e.target.value)}
+              onChange={e => props.setFps(e.target.value)}
             />
         </div>
     </div>
@@ -69,14 +69,23 @@ Toolbar.propTypes = {
     tool: PropTypes.string.isRequired,
     canUndo: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,
+    isPlaying: PropTypes.bool.isRequired,
     selectedFrame: PropTypes.number.isRequired,
+    fps: PropTypes.number.isRequired,
+    animate: PropTypes.arrayOf(PropTypes.object).isRequired,
     undo: PropTypes.func.isRequired,
     redo: PropTypes.func.isRequired,
     capture: PropTypes.func.isRequired,
     selectTool: PropTypes.func.isRequired,
+    setFps: PropTypes.func.isRequired,
+    updateFps: PropTypes.func.isRequired,
     insertFrame: PropTypes.func.isRequired,
     loadFrame: PropTypes.func.isRequired,
     deleteFrame: PropTypes.func.isRequired,
+    saveState: PropTypes.func.isRequired,
+    loadFile: PropTypes.func.isRequired,
+    playAnimation: PropTypes.func.isRequired,
+    pauseAnimation: PropTypes.func.isRequired,
 };
 
 export default Toolbar;
