@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 import { BRUSH } from '../constants/tools';
 
 const defaultState = {
-    brushColor: '#FFF',
+    brushColor: 'ffffff',
     isPainting: false,
     tool: BRUSH,
 };
