@@ -10,7 +10,7 @@
     "build": "webpack",
     "_build:watch": "npm run build -- --watch",
     "_serve": "http-server -p 8081 -c-1 dist --silent",
-    "lint": "eslint **/ --ext .jsx,.js --ignore-path .gitignore",
+    "lint": "eslint src --ext .jsx,.js --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {

@@ -16,6 +16,7 @@ app.on('ready', () => {
     });
   // load the file
     mainWindow.loadURL('http://localhost:8081/');
+    mainWindow.webContents.openDevTools();
   // Register window events
     mainWindow.on('closed', () => {
         mainWindow = null;
