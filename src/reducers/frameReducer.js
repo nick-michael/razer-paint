@@ -60,7 +60,9 @@ export default (state = defaultState, action) => {
         case types.LOAD_FILE:
             return {
                 ...state,
-                ...action.payload,
+                frame: action.payload.frame,
+                animate: action.payload.animate,
+                fps: action.payload.fps,
             };
         case types.SET_IS_PLAYING:
             return {
@@ -68,7 +70,6 @@ export default (state = defaultState, action) => {
                 isPlaying: action.payload,
             };
         case types.SET_FPS:
-            console.log('setting: ', action.payload);
             return {
                 ...state,
                 fps: action.payload,

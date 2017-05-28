@@ -34,7 +34,7 @@ const App = props => (
         </div>
         <div className="surface" style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Canvas />
-            <div style={{ marginLeft: '5px' }}> <ChromePicker color={props.brushColor} onChangeComplete={colorObject => props.setColor(colorObject.hex)} disableAlpha /> </div>
+            <div style={{ marginLeft: '5px' }}> <ChromePicker color={props.brushColor} onChangeComplete={colorObject => props.setLongHexColor(colorObject.hex)} disableAlpha /> </div>
         </div>
         <Animation
           frames={props.animate}

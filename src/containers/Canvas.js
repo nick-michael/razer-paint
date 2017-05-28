@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 const mergeProps = (stateProps, dispatchProps) => {
     const paintPixel = (pixel) => {
         const newFrame = Object.assign({}, stateProps.frame);
-        newFrame[`${pixel}`] = stateProps.tool === ERASER ? '#000' : stateProps.brushColor;
+        newFrame[`${pixel}`] = stateProps.tool === ERASER ? '000000' : stateProps.brushColor;
         dispatchProps.paintFrame(newFrame);
     };
 

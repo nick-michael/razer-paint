@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 import Pixel from './Pixel';
 import Toolbar from '../containers/Toolbar';
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../utils/frame';
+import { frameToSdk, CANVAS_WIDTH, CANVAS_HEIGHT } from '../utils/frame';
+import ChromaSDK from '../utils/chroma';
 
 export default class Canvas extends React.Component {
     componentDidMount() {
         window.addEventListener('mouseup', () => this.props.handleMouseUp());
+        ChromaSDK.init(80);
     }
 
     makePixel(count) {
@@ -15,6 +17,8 @@ export default class Canvas extends React.Component {
     }
 
     render() {
+        ChromaSDK.initialised && ChromaSDK.createKeyboardEffect('CHROMA_CUSTOM', frameToSdk(this.props.frame));
+
         const pixels = [];
         let count = 0;
         for (let i = 0; i < CANVAS_HEIGHT; i += 1) {
