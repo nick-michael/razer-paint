@@ -1,3 +1,5 @@
+import { compressAnimation, decompressAnimation } from './frame';
+
 const { dialog } = require('electron').remote;
 const fs = require('fs');
 
@@ -6,9 +8,17 @@ export const saveFile = (content) => {
         if (fileName === undefined) {
             return;
         }
-        const suffexedFileName = fileName.substr(-4) === '.rzp' ? fileName : `${fileName}.rzp`;
-        // fileName is a string that contains the path and filename created in the save file dialog.
-        fs.writeFile(suffexedFileName, content, (err) => {
+
+        const compressedAnimation = compressAnimation(content.animate);
+
+        const saveData = JSON.stringify({
+            ...content,
+            frame: content.frame,
+            animate: compressedAnimation,
+        });
+
+        const suffexedFileName = fileName.substr(-4) === '.rzp' ? fileName : `${fileName}.rzp`;        
+        fs.writeFile(suffexedFileName, saveData, (err) => {
             if (err) {
                 alert(`An error ocurred creating the file ${err.message}`);
             }
@@ -36,8 +46,17 @@ export const openFile = (loadToState) => {
                 return;
             }
 
+            const saveData = JSON.parse(data);
+            const decompressedAnimation = decompressAnimation(saveData.animate);
+
+            const decompressedData = {
+                ...saveData,
+                frame: saveData.frame,
+                animate: decompressedAnimation,
+            };
+
             // Change how to handle the file content
-            loadToState(JSON.parse(data));
+            loadToState(decompressedData);
         });
     });
 };

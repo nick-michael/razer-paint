@@ -38,3 +38,28 @@ export const frameToSdk = (frame) => {
     }
     return rows;
 };
+
+export const compressAnimation = (animation) => {
+    const compressedAnimation = [];
+        for (var index = animation.length - 1; index > 0; index--) {
+            const currentFrame = animation[index];
+            const previousFrame = animation[index - 1];
+            const compressedFrame = {};
+            for (var pixel in currentFrame) {
+                if (currentFrame[pixel] !== previousFrame[pixel]) {
+                    compressedFrame[pixel] = currentFrame[pixel];
+                }
+            }
+            compressedAnimation.unshift(compressedFrame);
+        }
+        compressedAnimation.unshift(animation[0]);
+        return compressedAnimation;
+};
+
+export const decompressAnimation = (compressedAnimation) => {
+        const decompressedAnimation = [compressedAnimation[0]];
+        for (var index = 1; index < compressedAnimation.length; index++) {
+            decompressedAnimation.push({ ...decompressedAnimation[index - 1], ...compressedAnimation[index] });
+        }
+        return decompressedAnimation;
+};

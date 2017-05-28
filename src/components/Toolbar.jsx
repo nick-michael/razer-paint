@@ -38,7 +38,7 @@ const Toolbar = props => (
             <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} name="trash" />
         </div>
         <div className="toolbar-spacer" />
-        <div className="toolbar-item" onMouseUp={() => saveFile(JSON.stringify(props.saveState))}>
+        <div className="toolbar-item" onMouseUp={() => saveFile(props.saveState)}>
             <FontAwesome className={'toolbar-item-icon__selected'} name="floppy-o" />
         </div>
         <div className="toolbar-item" onMouseUp={() => openFile(props.loadFile)}>
