@@ -6,9 +6,9 @@ import { selectAnimationFrame } from '../actions/frameActions';
 import App from '../components/App';
 
 const mapStateToProps = (state) => {
-    const { brushColor } = state.canvas;
+    const { brushColor, presetColors } = state.canvas;
     const { animate, selectedFrame } = state.frames;
-    return { brushColor, animate, selectedFrame };
+    return { brushColor, presetColors, animate, selectedFrame };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(

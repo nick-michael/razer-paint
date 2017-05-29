@@ -1,0 +1,26 @@
+.preset-color-picker {
+    width: 84px;
+    height: 224px;
+    background: $color-mid-grey;
+    border-radius: 2px;
+    margin-left: 5px;
+
+    .color-spot-container {
+        display: inline-block;
+        width: 28px;
+        height: 18px;
+        margin-top: 5px;
+    }
+
+    .color-spot {
+        height: 16px;
+        width: 16px;
+        border-radius: 10px;
+        margin: auto;
+        box-sizing: border-box;
+        border: 2px solid $color-dark-grey;
+        &__selected {
+            border: 2px solid $color-white-grey;
+        }
+    }
+}
