@@ -35,7 +35,7 @@ export default (state = defaultState, action) => {
         case types.CAPTURE:
             return { ...state, animate: state.animate.concat(state.frame) };
         case types.SELECT_ANIMATION_FRAME:
-            return { ...state, selectedFrame: action.payload };
+            return { ...state, frame: state.animate[action.payload], frames: state.frames.concat(state.frame), selectedFrame: action.payload };
         case types.DELETE_FRAME:
             return { ...state,
                 animate: state.animate.filter((e, i) => (i !== state.selectedFrame)),
@@ -46,6 +46,7 @@ export default (state = defaultState, action) => {
         case types.INSERT_FRAME:
             return {
                 ...state,
+                selectedFrame: state.selectedFrame + 1,
                 animate: [
                     ...state.animate.slice(0, state.selectedFrame + 1),
                     state.frame,

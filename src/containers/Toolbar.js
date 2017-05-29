@@ -51,7 +51,12 @@ const mergeProps = (stateProps, dispatchProps) => {
         dispatchProps.setIsPlaying(false);
         clearInterval(interval);
     };
-    return { ...stateProps, ...dispatchProps, playAnimation, pauseAnimation, updateFps };
+
+    const loadAnimation = (file) => {
+        count = 0;
+        dispatchProps.loadFile(file);
+    };
+    return { ...stateProps, ...dispatchProps, playAnimation, pauseAnimation, updateFps, loadAnimation };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Toolbar);

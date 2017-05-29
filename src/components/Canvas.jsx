@@ -13,7 +13,7 @@ export default class Canvas extends React.Component {
     }
 
     makePixel(count) {
-        return (<div key={count} onMouseDown={() => this.props.handlePixelClick(`${count}`)} onMouseOver={() => this.props.handleMouseOver(`${count}`)}><Pixel color={this.props.frame[`${count}`]} /></div>);
+        return (<div key={count} onMouseUp={(e) => this.props.handlePixelMouseUp(e, `${count}`)} onMouseDown={(e) => this.props.handlePixelMouseDown(e, `${count}`)} onMouseOver={(e) => this.props.handleMouseOver(e, `${count}`)}><Pixel color={this.props.frame[`${count}`]} /></div>);
     }
 
     render() {
@@ -43,7 +43,7 @@ export default class Canvas extends React.Component {
 
 Canvas.propTypes = {
     frame: PropTypes.objectOf(PropTypes.string).isRequired,
-    handlePixelClick: PropTypes.func.isRequired,
+    handlePixelMouseDown: PropTypes.func.isRequired,
     handleMouseOver: PropTypes.func.isRequired,
     handleMouseUp: PropTypes.func.isRequired,
     setIsPainting: PropTypes.func.isRequired,

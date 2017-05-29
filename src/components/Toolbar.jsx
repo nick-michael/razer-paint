@@ -2,51 +2,51 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
-import { BRUSH, PICKER, ERASER } from '../constants/tools';
+import { BRUSH, PICKER, ERASER, FILL } from '../constants/tools';
 
 import { saveFile, openFile } from '../utils/fileStytem';
 
 const Toolbar = props => (
     <div className="toolbar">
         <div className="toolbar-item" onMouseUp={() => props.selectTool(BRUSH)}>
-            <FontAwesome className={`toolbar-item-icon${props.tool === BRUSH ? '__selected' : ''}`} name="paint-brush" />
+            <div className={`toolbar-item-icon toolbar-item-icon-brush${props.tool === BRUSH ? '__selected' : ''}`} />
         </div>
         <div className="toolbar-item" onMouseUp={() => props.selectTool(PICKER)}>
-            <FontAwesome className={`toolbar-item-icon${props.tool === PICKER ? '__selected' : ''}`} name="eyedropper" />
+            <div className={`toolbar-item-icon toolbar-item-icon-picker${props.tool === PICKER ? '__selected' : ''}`} />
         </div>
         <div className="toolbar-item" onMouseUp={() => props.selectTool(ERASER)}>
-            <FontAwesome className={`toolbar-item-icon${props.tool === ERASER ? '__selected' : ''}`} name="eraser" />
+            <FontAwesome className={`toolbar-item-fontawesome ${props.tool === ERASER ? 'toolbar-item-fontawesome__selected' : ''}`} name="eraser" />
+        </div>
+        <div className="toolbar-item" onMouseUp={() => props.selectTool(FILL)}>
+            <div className={`toolbar-item-icon toolbar-item-icon-fill${props.tool === FILL ? '__selected' : ''}`} />
         </div>
         <div className="toolbar-spacer" />
         <div className="toolbar-item" onMouseUp={() => props.canUndo && props.undo()}>
-            <FontAwesome className={`toolbar-item-icon${props.canUndo ? '__selected' : ''}`} name="undo" />
+            <div className={`toolbar-item-icon toolbar-item-icon-undo${props.canUndo ? '__selected' : ''}`} />
         </div>
         <div className="toolbar-item" onMouseUp={() => props.canRedo && props.redo()}>
-            <FontAwesome className={`toolbar-item-icon${props.canRedo ? '__selected' : ''}`} name="repeat" />
+            <div className={`toolbar-item-icon toolbar-item-icon-redo${props.canRedo ? '__selected' : ''}`} />
         </div>
         <div className="toolbar-spacer" />
         <div className="toolbar-item" onMouseUp={props.capture}>
-            <FontAwesome className={'toolbar-item-icon__selected'} name="camera" />
+            <FontAwesome className={'toolbar-item-fontawesome__selected'} name="camera" />
         </div>
         <div className="toolbar-item" onMouseUp={typeof props.selectedFrame === 'number' && props.insertFrame}>
-            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} name="level-down" />
-        </div>
-        <div className="toolbar-item" onMouseUp={typeof props.selectedFrame === 'number' && props.loadFrame}>
-            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} name="level-up" />
+            <FontAwesome className={`toolbar-item-fontawesome ${typeof props.selectedFrame === 'number' ? 'toolbar-item-fontawesome__selected' : ''}`} name="level-down" />
         </div>
         <div className="toolbar-item" onMouseUp={typeof props.selectedFrame === 'number' && props.deleteFrame}>
-            <FontAwesome className={`toolbar-item-icon${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} name="trash" />
+            <div className={`toolbar-item-icon toolbar-item-icon-trash${typeof props.selectedFrame === 'number' ? '__selected' : ''}`} />
         </div>
         <div className="toolbar-spacer" />
         <div className="toolbar-item" onMouseUp={() => saveFile(props.saveState)}>
-            <FontAwesome className={'toolbar-item-icon__selected'} name="floppy-o" />
+            <FontAwesome className={'toolbar-item-fontawesome__selected'} name="floppy-o" />
         </div>
-        <div className="toolbar-item" onMouseUp={() => openFile(props.loadFile)}>
-            <FontAwesome className={'toolbar-item-icon__selected'} name="folder-open" />
+        <div className="toolbar-item" onMouseUp={() => openFile(props.loadAnimation)}>
+            <FontAwesome className={'toolbar-item-fontawesome__selected'} name="folder-open" />
         </div>
         <div className="toolbar-spacer" />
         <div className="toolbar-item" onMouseUp={props.isPlaying ? props.animate.length > 0 && props.pauseAnimation : props.animate.length > 0 && props.playAnimation}>
-            <FontAwesome className={`toolbar-item-icon${props.animate.length > 0 ? '__selected' : ''}`} name={props.isPlaying ? 'pause' : 'play'} />
+            <FontAwesome className={`toolbar-item-fontawesome ${props.animate.length > 0 ? 'toolbar-item-fontawesome__selected' : ''}`} name={props.isPlaying ? 'pause' : 'play'} />
         </div>
         <div className="toolbar-slider">
             <div className="toolbar-slider-value">
@@ -80,7 +80,6 @@ Toolbar.propTypes = {
     setFps: PropTypes.func.isRequired,
     updateFps: PropTypes.func.isRequired,
     insertFrame: PropTypes.func.isRequired,
-    loadFrame: PropTypes.func.isRequired,
     deleteFrame: PropTypes.func.isRequired,
     saveState: PropTypes.func.isRequired,
     loadFile: PropTypes.func.isRequired,

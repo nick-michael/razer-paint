@@ -53,6 +53,10 @@ module.exports = {
 			{
 				test: /\.json$/,
 				loaders: ['json']
+			},
+			{
+				test: /\.svg$/,
+				loaders: ['url']
 			}
 		],     
         preLoaders: [
