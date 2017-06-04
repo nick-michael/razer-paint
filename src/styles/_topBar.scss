@@ -31,25 +31,25 @@
             margin: 5px 2px;
 
             .button-icon {
-                transform: scale(0.8);
+                transform: scale(0.4);
             }
         }
 
         .button-close {
             background: #FF645B;
-            color: #FF645B;
+            fill: #FF645B;
 
             &:hover {
-                color: #BF341B;
+                fill: #BF341B;
             }
         }
 
         .button-minimize {
             background: #FFC430;
-            color: #FFC430;
+            fill: #FFC430;
 
             &:hover {
-                color: #BF9400
+                fill: #BF9400
             }
         }
 

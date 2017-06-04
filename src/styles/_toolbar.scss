@@ -14,13 +14,10 @@
         background-color: $color-dark-grey;
         border-radius: 2px;
         margin-right: 4px;
-        
+        fill: $color-mid-grey;
+
         svg {
             height: 20px;
-        }
-
-        path {
-            fill: $color-mid-grey;
         }
 
         &-icon {
@@ -29,15 +26,11 @@
             justify-content: center;
 
             &__available {
-                path {
-                    fill: $color-white-grey;
-                }
+                fill: $color-white-grey;
             }
 
             &__selected {
-                path {
-                    fill: $color-razer-green;
-                }
+                fill: $color-razer-green;
             }
         }
     }

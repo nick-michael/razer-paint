@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { remote } from 'electron';
 
 import { ChromePicker } from 'react-color';
-import FontAwesome from 'react-fontawesome';
 import Canvas from '../containers/Canvas';
 import Animation from './Animation';
 import PresetColorPicker from './PresetColorPicker';
+import * as icons from '../icons/icons';
 
 const float = os.platform() === 'darwin' ? 'left' : 'right';
 
@@ -26,10 +26,10 @@ const App = props => (
             <span className="label">Razer Paint</span>
             <span className="button-container" style={{ float }}>
                 <span className="button button-close" style={{ float }} onClick={closeApp}>
-                    <FontAwesome className="button-icon" name="times" />
+                    <div className="button-icon"><icons.Close /></div>
                 </span>
                 <span className="button button-minimize" style={{ float }} onClick={minimizeApp}>
-                    <FontAwesome className="button-icon" name="minus" />
+                    <div className="button-icon"><icons.Minimize /></div>
                 </span>
             </span>
         </div>

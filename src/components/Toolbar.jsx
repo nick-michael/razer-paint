@@ -8,66 +8,66 @@ import { saveFile, openFile } from '../utils/fileStytem';
 
 const Toolbar = props => (
     <div className="toolbar">
-        <div className="toolbar-item" onMouseUp={() => props.selectTool(BRUSH)}>
+        <div className="toolbar-item" onClick={() => props.selectTool(BRUSH)}>
             <div className={`toolbar-item-icon toolbar-item-icon__${props.tool === BRUSH ? 'selected' : 'available'}`}>
                 <icons.Brush />
             </div>
         </div>
-        <div className="toolbar-item" onMouseUp={() => props.selectTool(PICKER)}>
+        <div className="toolbar-item" onClick={() => props.selectTool(PICKER)}>
             <div className={`toolbar-item-icon toolbar-item-icon__${props.tool === PICKER ? 'selected' : 'available'}`}>
                 <icons.Eyedropper />
             </div>
         </div>
-        <div className="toolbar-item" onMouseUp={() => props.selectTool(ERASER)}>
+        <div className="toolbar-item" onClick={() => props.selectTool(ERASER)}>
             <div className={`toolbar-item-icon toolbar-item-icon__${props.tool === ERASER ? 'selected' : 'available'}`}>
                 <icons.Eraser />
             </div>
         </div>
-        <div className="toolbar-item" onMouseUp={() => props.selectTool(FILL)}>
+        <div className="toolbar-item" onClick={() => props.selectTool(FILL)}>
             <div className={`toolbar-item-icon toolbar-item-icon__${props.tool === FILL ? 'selected' : 'available'}`}>
                 <icons.Bucket />
             </div>
         </div>
         <div className="toolbar-spacer" />
-        <div className="toolbar-item" onMouseUp={() => props.canUndo && props.undo()}>
+        <div className="toolbar-item" onClick={() => props.canUndo && props.undo()}>
             <div className={`toolbar-item-icon toolbar-item-icon__${props.canUndo ? 'available' : ''}`}>
                 <icons.Undo />
             </div>
         </div>
-        <div className="toolbar-item" onMouseUp={() => props.canRedo && props.redo()}>
+        <div className="toolbar-item" onClick={() => props.canRedo && props.redo()}>
             <div className={`toolbar-item-icon toolbar-item-icon__${props.canRedo ? 'available' : ''}`}>
                 <icons.Redo />
             </div>
         </div>
         <div className="toolbar-spacer" />
-        <div className="toolbar-item" onMouseUp={props.capture}>
+        <div className="toolbar-item" onClick={props.capture}>
             <div className="toolbar-item-icon toolbar-item-icon__available">
                 <icons.Capture />
             </div>
         </div>
-        <div className="toolbar-item" onMouseUp={typeof props.selectedFrame === 'number' && props.insertFrame}>
+        <div className="toolbar-item" onClick={typeof props.selectedFrame === 'number' && props.insertFrame}>
             <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
                 <icons.Insert />
             </div>
         </div>
-        <div className="toolbar-item" onMouseUp={typeof props.selectedFrame === 'number' && props.deleteFrame}>
+        <div className="toolbar-item" onClick={typeof props.selectedFrame === 'number' && props.deleteFrame}>
             <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
                 <icons.Trashcan />
             </div>
         </div>
         <div className="toolbar-spacer" />
-        <div className="toolbar-item" onMouseUp={() => saveFile(props.saveState)}>
+        <div className="toolbar-item" onClick={() => saveFile(props.saveState)}>
             <div className="toolbar-item-icon toolbar-item-icon__available">
                 <icons.Save />
             </div>
         </div>
-        <div className="toolbar-item" onMouseUp={() => openFile(props.loadAnimation)}>
+        <div className="toolbar-item" onClick={() => openFile(props.loadAnimation)}>
             <div className="toolbar-item-icon toolbar-item-icon__available">
                 <icons.Open />
             </div>
         </div>
         <div className="toolbar-spacer" />
-        <div className="toolbar-item" onMouseUp={props.isPlaying ? props.animate.length > 0 && props.pauseAnimation : props.animate.length > 0 && props.playAnimation}>
+        <div className="toolbar-item" onClick={props.isPlaying ? props.animate.length > 0 && props.pauseAnimation : props.animate.length > 0 && props.playAnimation}>
             <div className={`toolbar-item-icon ${props.animate.length > 0 ? 'toolbar-item-icon__available' : ''}`}>
                 {props.isPlaying ? <icons.Pause /> : <icons.Play />}
             </div>
