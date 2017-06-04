@@ -14,69 +14,29 @@
         background-color: $color-dark-grey;
         border-radius: 2px;
         margin-right: 4px;
+        
+        svg {
+            height: 20px;
+        }
 
-        &-fontawesome {
-            color: $color-mid-grey;
-            transform: scale(1.6);
-
-            &__selected {
-                color: $color-white-grey;
-            }
+        path {
+            fill: $color-mid-grey;
         }
 
         &-icon {
-            height: 100%;
-            width: 100%;
-            background-repeat: no-repeat;
-            background-size: 65%;
-            background-position: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-            &-brush {
-                background-image: url('../icons/brush-grey.svg');
-                &__selected {
-                    background-image: url('../icons/brush-white.svg');
-                }
-            }
-            
-            &-picker {
-                background-image: url('../icons/eyedropper-grey.svg');
-                &__selected {
-                    background-image: url('../icons/eyedropper-white.svg');
+            &__available {
+                path {
+                    fill: $color-white-grey;
                 }
             }
 
-            &-fill {
-                background-image: url('../icons/paint-bucket-grey.svg');
-                &__selected {
-                    background-image: url('../icons/paint-bucket-white.svg');
-                }
-            }
-
-            &-undo {
-                background-image: url('../icons/undo-grey.svg');
-                &__selected {
-                    background-image: url('../icons/undo-white.svg');
-                }
-            }
-
-            &-redo {
-                background-image: url('../icons/redo-grey.svg');
-                &__selected {
-                    background-image: url('../icons/redo-white.svg');
-                }
-            }
-
-            &-insert {
-                background-image: url('../icons/insert-grey.svg');
-                &__selected {
-                    background-image: url('../icons/insert-white.svg');
-                }
-            }
-
-            &-trash {
-                background-image: url('../icons/trash-can-grey.svg');
-                &__selected {
-                    background-image: url('../icons/trash-can-white.svg');
+            &__selected {
+                path {
+                    fill: $color-razer-green;
                 }
             }
         }
