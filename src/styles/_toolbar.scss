@@ -4,6 +4,7 @@
     background-color: $color-mid-grey;
     border-radius: 2px;
     padding: 4px 0px 4px 4px;
+    margin-bottom: 4px;
 
     &-item {
         display: flex;
@@ -17,7 +18,7 @@
         fill: $color-mid-grey;
 
         svg {
-            height: 20px;
+            height: 24px;
         }
 
         &-icon {
