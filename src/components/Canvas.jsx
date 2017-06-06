@@ -9,7 +9,7 @@ import ChromaSDK from '../utils/chroma';
 export default class Canvas extends React.Component {
     componentDidMount() {
         window.addEventListener('mouseup', () => this.props.handleMouseUp());
-        ChromaSDK.init(80);
+        ChromaSDK.init(54235);
     }
 
     makePixel(count) {

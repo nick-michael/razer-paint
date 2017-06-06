@@ -24,6 +24,12 @@ export const Bucket = () => (
     </svg>
 );
 
+export const Keys = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+	    <path d="M23.3,14.5l-0.7-2.1l0,0v0h-5.2l-0.7,2.1L16.4,19h7.2L23.3,14.5z M22.3,17.1h-4.6v-3.9h4.6V17.1z M14.6,12.4L14.6,12.4L14.6,12.4H9.4l-0.7,2.1L8.4,19h7.2l-0.3-4.5L14.6,12.4z M14.3,17.1H9.7v-3.9h4.6V17.1z M6.6,12.4L6.6,12.4 L6.6,12.4H1.4l-0.7,2.1L0.4,19h7.2l-0.3-4.5L6.6,12.4z M6.3,17.1H1.7v-3.9h4.6V17.1z M14.8,4.4L14.8,4.4L14.8,4.4H9.6L8.9,6.5 L8.6,11h7.2l-0.3-4.5L14.8,4.4z M14.5,9.1H9.9V5.1h4.6V9.1z"/>
+    </svg>
+);
+
 export const Undo = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         <path d="M18.885 3.515c-4.617-4.618-12.056-4.676-16.756-.195l-2.129-2.258v7.938h7.484l-2.066-2.191c2.82-2.706 7.297-2.676 10.073.1 4.341 4.341 1.737 12.291-5.491 12.291v4.8c3.708 0 6.614-1.244 8.885-3.515 4.686-4.686 4.686-12.284 0-16.97z"/>
@@ -75,6 +81,12 @@ export const Play = () => (
 export const Pause = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         <path d="M11 22h-5v-20h4v20zm6-20h-3v20h4v-20z"/>
+    </svg>
+);
+
+export const Rewind = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M9 12l15-9v18l-15-9zm-9 0l13 8v-3.268l-7.888-4.732 7.888-4.732v-3.268l-13 8z"/>
     </svg>
 );
 

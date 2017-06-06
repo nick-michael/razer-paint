@@ -48,6 +48,10 @@ export const setIsPlaying = flag => ({
     payload: flag,
 });
 
+export const toggleReverse = () => ({
+    type: types.TOGGLE_REVERSE
+});
+
 export const setFps = fps => ({
     type: types.SET_FPS,
     payload: fps,

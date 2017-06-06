@@ -10,11 +10,11 @@ let count = 0;
 
 const mapStateToProps = (state) => {
     const { tool } = state.canvas;
-    const { frame, frames, redoFrames, animate, selectedFrame, fps, isPlaying } = state.frames;
+    const { frame, frames, redoFrames, animate, selectedFrame, fps, isPlaying, isReversed } = state.frames;
     const canUndo = frames.length > 1;
     const canRedo = redoFrames.length > 0;
     const saveState = { frame, animate, fps };
-    return { tool, canUndo, canRedo, animate, selectedFrame, fps, isPlaying, saveState };
+    return { tool, canUndo, canRedo, animate, selectedFrame, fps, isPlaying, isReversed, saveState };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -23,28 +23,39 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 );
 
 const mergeProps = (stateProps, dispatchProps) => {
-    const playAnimation = () => {
+    const playAnimation = (reverseOverride) => {
+        const isReversed = typeof reverseOverride === 'boolean' ? reverseOverride : stateProps.isReversed;
         dispatchProps.setIsPlaying(true);
-        interval = setInterval(() => {
-            if (count >= stateProps.animate.length) {
-                count = 0;
-            }
-            dispatchProps.paintFrame(stateProps.animate[count]);
-            count += 1;
-        }, 1000 / stateProps.fps);
+
+        // Avoid putting logic inside the intervals to optimise performace
+        // for higher framerates
+
+        if (!isReversed) {
+            interval = setInterval(() => {
+                count = count % stateProps.animate.length;
+                dispatchProps.paintFrame(stateProps.animate[count]);
+                count = count += 1;
+            }, 1000 / stateProps.fps);
+        } else {
+            interval = setInterval(() => {
+                count = count < 0 ? stateProps.animate.length -1 : count;
+                dispatchProps.paintFrame(stateProps.animate[count]);
+                count = count -= 1;
+            }, 1000 / stateProps.fps);
+        }
     };
 
-    const updateFps = (fps) => {
+    const toggleReverse = () => {
+        dispatchProps.toggleReverse();
         if (stateProps.isPlaying) {
             clearInterval(interval);
-            interval = setInterval(() => {
-                if (count >= stateProps.animate.length) {
-                    count = 0;
-                }
-                dispatchProps.paintFrame(stateProps.animate[count]);
-                count += 1;
-            }, 1000 / fps);
+            playAnimation(!stateProps.isReversed);
         }
+    }
+
+    const updateFps = (fps) => {
+        clearInterval(interval);
+        playAnimation();
     };
 
     const pauseAnimation = () => {
@@ -56,7 +67,7 @@ const mergeProps = (stateProps, dispatchProps) => {
         count = 0;
         dispatchProps.loadFile(file);
     };
-    return { ...stateProps, ...dispatchProps, playAnimation, pauseAnimation, updateFps, loadAnimation };
+    return { ...stateProps, ...dispatchProps, playAnimation, toggleReverse, pauseAnimation, updateFps, loadAnimation };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Toolbar);

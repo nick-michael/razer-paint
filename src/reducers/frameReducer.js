@@ -10,6 +10,7 @@ const defaultState = {
     selectedFrame: null,
     fps: 30,
     isPlaying: false,
+    isReversed: false,
 };
 
 export default (state = defaultState, action) => {
@@ -69,6 +70,11 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 isPlaying: action.payload,
+            };
+        case types.TOGGLE_REVERSE:
+            return {
+                ...state,
+                isReversed: !state.isReversed,
             };
         case types.SET_FPS:
             return {
