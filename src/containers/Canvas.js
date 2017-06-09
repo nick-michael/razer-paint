@@ -8,9 +8,9 @@ import { BRUSH, PICKER, ERASER, FILL } from '../constants/tools';
 
 const mapStateToProps = (state) => {
     const { tool, brushColor, isPainting } = state.canvas;
-    const { frame, frames, redoFrames, animate } = state.frames;
+    const { frame, frames, redoFrames, animate, isPlaying } = state.frames;
 
-    return { tool, brushColor, isPainting, frame, frames, redoFrames, animate };
+    return { tool, brushColor, isPainting, frame, frames, redoFrames, animate, isPlaying };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -42,9 +42,9 @@ const mergeProps = (stateProps, dispatchProps) => {
     };
 
     const toolClickMap = {
-        [BRUSH]: pixel => paintPixel(pixel),
-        [ERASER]: pixel => paintPixel(pixel, '000000'),
-        [PICKER]: pixel => pickPixel(pixel),
+        [BRUSH]: pixel => !stateProps.isPlaying && paintPixel(pixel),
+        [ERASER]: pixel => !stateProps.isPlaying && paintPixel(pixel, '000000'),
+        [PICKER]: pixel => !stateProps.isPlaying && pickPixel(pixel),
     };
 
     const handlePixelMouseDown = (e, pixel) => {
@@ -56,7 +56,7 @@ const mergeProps = (stateProps, dispatchProps) => {
     };
 
     const handlePixelMouseUp = (e, pixel) => {
-        stateProps.tool === FILL && fill(pixel, e.button === 2 && '000000');
+        stateProps.tool === FILL && !stateProps.isPlaying && fill(pixel, e.button === 2 && '000000');
     };
 
     const handleMouseOver = (e, pixel) => {

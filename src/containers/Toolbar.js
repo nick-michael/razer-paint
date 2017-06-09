@@ -81,12 +81,14 @@ const mergeProps = (stateProps, dispatchProps) => {
     };
 
     const pauseAnimation = () => {
+        console.log('pausing!');
         dispatchProps.setIsPlaying(false);
         clearInterval(interval);
     };
 
     const loadAnimation = (file) => {
         count = 0;
+        pauseAnimation();
         dispatchProps.loadFile(file);
     };
     return {

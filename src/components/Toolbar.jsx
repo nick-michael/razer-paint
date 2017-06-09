@@ -8,7 +8,7 @@ import { saveFile, openFile } from '../utils/fileStytem';
 
 const Toolbar = props => (
     <div>
-        <div className="toolbar" style={{ marginBottom: '4px' }}>
+        <div className={`toolbar ${props.isPlaying ? 'toolbar-disabled-playing' : ''}`} style={{ marginBottom: '4px' }}>
             <div className="toolbar-item" onClick={() => props.selectTool(BRUSH)}>
                 <div className="tooltip">Brush</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.tool === BRUSH ? 'selected' : 'available'}`}>
@@ -34,21 +34,21 @@ const Toolbar = props => (
                 </div>
             </div>
             <div className="toolbar-spacer" />
-            <div className="toolbar-item" onClick={() => props.canUndo && props.undo()}>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={() => props.canUndo && props.undo()}>
                 <div className="tooltip">Undo</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.canUndo ? 'available' : ''}`}>
                     <icons.Undo />
                 </div>
             </div>
-            <div className="toolbar-item" onClick={() => props.canRedo && props.redo()}>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={() => props.canRedo && props.redo()}>
                 <div className="tooltip">Redo</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.canRedo ? 'available' : ''}`}>
                     <icons.Redo />
                 </div>
             </div>
         </div>
-        <div className="toolbar">
-            <div className="toolbar-item" onClick={props.capture}>
+        <div className={`toolbar ${props.isPlaying ? 'toolbar-disabled-playing' : ''}`}>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={props.capture}>
                 <div className="tooltip">Caputre Frame</div>
                 <div className="toolbar-item-icon toolbar-item-icon__available">
                     <icons.Capture />
@@ -60,13 +60,13 @@ const Toolbar = props => (
                     <icons.Edit />
                 </div>
             </div>
-            <div className="toolbar-item" onClick={typeof props.selectedFrame === 'number' && props.insertFrame}>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={typeof props.selectedFrame === 'number' && props.insertFrame}>
                 <div className="tooltip">Insert Frame</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
                     <icons.Insert />
                 </div>
             </div>
-            <div className="toolbar-item" onClick={typeof props.selectedFrame === 'number' && props.deleteFrame}>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={typeof props.selectedFrame === 'number' && props.deleteFrame}>
                 <div className="tooltip">Delete Frame</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
                     <icons.Trashcan />

@@ -111,3 +111,13 @@
     }
 
 }
+
+.toolbar-disabled-playing {
+    .toolbar-item-can-disable {
+        pointer-events: none;
+
+        .toolbar-item-icon {
+            fill: $color-mid-grey !important;
+        }
+    }
+}
