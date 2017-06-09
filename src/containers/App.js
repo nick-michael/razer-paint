@@ -18,15 +18,15 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 
 const mergeProps = (stateProps, dispatchProps) => {
     const setLongHexColor = (hex) => {
-        let color = hex.substr(1);
+        const color = hex.substr(1);
         if (color.length === 6) {
             dispatchProps.setColor(color);
         } else if (color.length === 3) {
-            color.replace('/./g', (str) => str[0]);
+            color.replace('/./g', str => str[0]);
             dispatchProps.setColor(color);
         }
     };
-    return { ...stateProps, ...dispatchProps, setLongHexColor }
+    return { ...stateProps, ...dispatchProps, setLongHexColor };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App);

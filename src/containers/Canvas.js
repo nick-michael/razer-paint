@@ -33,7 +33,7 @@ const mergeProps = (stateProps, dispatchProps) => {
     const fill = (pixel, color) => {
         const fillColor = color || stateProps.brushColor;
         const newFrame = Object.assign({}, stateProps.frame);
-        for (let index in newFrame) {
+        for (const index in newFrame) {
             if (newFrame[index] === stateProps.frame[pixel]) {
                 newFrame[index] = fillColor;
             }
@@ -51,7 +51,7 @@ const mergeProps = (stateProps, dispatchProps) => {
         if (e.button === 0) {
             toolClickMap[stateProps.tool] && toolClickMap[stateProps.tool](pixel);
         } else if (e.button === 2 && stateProps.tool !== FILL) {
-            toolClickMap[ERASER](pixel)
+            toolClickMap[ERASER](pixel);
         }
     };
 

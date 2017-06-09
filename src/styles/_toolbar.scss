@@ -4,7 +4,6 @@
     background-color: $color-mid-grey;
     border-radius: 2px;
     padding: 4px 0px 4px 4px;
-    margin-bottom: 4px;
 
     &-item {
         display: flex;
@@ -16,6 +15,7 @@
         border-radius: 2px;
         margin-right: 4px;
         fill: $color-mid-grey;
+        position: relative;
 
         svg {
             height: 24px;
@@ -32,6 +32,36 @@
 
             &__selected {
                 fill: $color-razer-green;
+            }
+        }
+
+        .tooltip {
+            z-index: 100;
+            visibility: hidden;
+            position: absolute;
+            top: -25px;
+            background: $color-white-grey;
+            border: 3px solid $color-white-grey;
+            border-radius: 2px;
+            font-size: small;
+            text-align: center;
+            opacity: 0;
+            transition: 0.5s opacity, visibility 0s;
+        }
+
+        &:hover {
+            .tooltip {
+                z-index: 100;
+                position: absolute;
+                top: -25px;
+                background: $color-white-grey;
+                border: 3px solid $color-white-grey;
+                border-radius: 2px;
+                font-size: small;
+                text-align: center;
+                opacity: 1;
+                visibility: visible;
+                transition-delay:1s;
             }
         }
     }

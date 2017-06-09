@@ -8,34 +8,40 @@ import { saveFile, openFile } from '../utils/fileStytem';
 
 const Toolbar = props => (
     <div>
-        <div className="toolbar">
+        <div className="toolbar" style={{ marginBottom: '4px' }}>
             <div className="toolbar-item" onClick={() => props.selectTool(BRUSH)}>
+                <div className="tooltip">Brush</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.tool === BRUSH ? 'selected' : 'available'}`}>
                     <icons.Brush />
                 </div>
             </div>
             <div className="toolbar-item" onClick={() => props.selectTool(PICKER)}>
+                <div className="tooltip">Color Picker</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.tool === PICKER ? 'selected' : 'available'}`}>
                     <icons.Eyedropper />
                 </div>
             </div>
             <div className="toolbar-item" onClick={() => props.selectTool(ERASER)}>
+                <div className="tooltip">Eraser</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.tool === ERASER ? 'selected' : 'available'}`}>
                     <icons.Eraser />
                 </div>
             </div>
             <div className="toolbar-item" onClick={() => props.selectTool(FILL)}>
+                <div className="tooltip">Fill Tool</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.tool === FILL ? 'selected' : 'available'}`}>
                     <icons.Bucket />
                 </div>
             </div>
             <div className="toolbar-spacer" />
             <div className="toolbar-item" onClick={() => props.canUndo && props.undo()}>
+                <div className="tooltip">Undo</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.canUndo ? 'available' : ''}`}>
                     <icons.Undo />
                 </div>
             </div>
             <div className="toolbar-item" onClick={() => props.canRedo && props.redo()}>
+                <div className="tooltip">Redo</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.canRedo ? 'available' : ''}`}>
                     <icons.Redo />
                 </div>
@@ -43,38 +49,51 @@ const Toolbar = props => (
         </div>
         <div className="toolbar">
             <div className="toolbar-item" onClick={props.capture}>
+                <div className="tooltip">Caputre Frame</div>
                 <div className="toolbar-item-icon toolbar-item-icon__available">
                     <icons.Capture />
                 </div>
             </div>
+            <div className="toolbar-item" onClick={props.toggleEditing}>
+                <div className="tooltip">Edit Frame</div>
+                <div className={`toolbar-item-icon ${typeof props.selectedFrame !== 'number' ? '' : props.isEditing ? 'toolbar-item-icon__selected' : 'toolbar-item-icon__available'}`}>
+                    <icons.Edit />
+                </div>
+            </div>
             <div className="toolbar-item" onClick={typeof props.selectedFrame === 'number' && props.insertFrame}>
+                <div className="tooltip">Insert Frame</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
                     <icons.Insert />
                 </div>
             </div>
             <div className="toolbar-item" onClick={typeof props.selectedFrame === 'number' && props.deleteFrame}>
+                <div className="tooltip">Delete Frame</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
                     <icons.Trashcan />
                 </div>
             </div>
             <div className="toolbar-spacer" />
             <div className="toolbar-item" onClick={() => saveFile(props.saveState)}>
+                <div className="tooltip">Save Animation</div>
                 <div className="toolbar-item-icon toolbar-item-icon__available">
                     <icons.Save />
                 </div>
             </div>
             <div className="toolbar-item" onClick={() => openFile(props.loadAnimation)}>
+                <div className="tooltip">Open Animation</div>
                 <div className="toolbar-item-icon toolbar-item-icon__available">
                     <icons.Open />
                 </div>
             </div>
             <div className="toolbar-spacer" />
             <div className="toolbar-item" onClick={props.isPlaying ? props.animate.length > 0 && props.pauseAnimation : props.animate.length > 0 && props.playAnimation}>
+                <div className="tooltip">{ props.isPlaying ? 'Pause' : 'Play' }</div>
                 <div className={`toolbar-item-icon ${props.animate.length > 0 ? 'toolbar-item-icon__available' : ''}`}>
                     {props.isPlaying ? <icons.Pause /> : <icons.Play />}
                 </div>
             </div>
             <div className="toolbar-item" onClick={props.toggleReverse}>
+                <div className="tooltip">Reverse Animation</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.isReversed ? 'selected' : 'available'}`}>
                     <icons.Rewind />
                 </div>
@@ -84,13 +103,13 @@ const Toolbar = props => (
                     fps: {props.fps}
                 </div>
                 <input
-                className="toolbar-slider-input"
-                type="range"
-                max={60}
-                min={1}
-                value={props.fps}
-                onMouseUp={e => props.updateFps(e.target.value)}
-                onChange={e => props.setFps(e.target.value)}
+                  className="toolbar-slider-input"
+                  type="range"
+                  max={60}
+                  min={1}
+                  value={props.fps}
+                  onMouseUp={props.updateFps}
+                  onChange={e => props.setFps(e.target.value)}
                 />
             </div>
         </div>
@@ -111,12 +130,16 @@ Toolbar.propTypes = {
     selectTool: PropTypes.func.isRequired,
     setFps: PropTypes.func.isRequired,
     updateFps: PropTypes.func.isRequired,
+    toggleEditing: PropTypes.func.isRequired,
+    isEditing: PropTypes.bool.isRequired,
     insertFrame: PropTypes.func.isRequired,
     deleteFrame: PropTypes.func.isRequired,
     saveState: PropTypes.func.isRequired,
-    loadFile: PropTypes.func.isRequired,
+    loadAnimation: PropTypes.func.isRequired,
     playAnimation: PropTypes.func.isRequired,
     pauseAnimation: PropTypes.func.isRequired,
+    toggleReverse: PropTypes.func.isRequired,
+    isReversed: PropTypes.bool.isRequired,
 };
 
 export default Toolbar;

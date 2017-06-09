@@ -21,6 +21,10 @@ export const capture = () => ({
     type: types.CAPTURE,
 });
 
+export const toggleEditing = () => ({
+    type: types.TOGGLE_EDITING,
+});
+
 export const selectAnimationFrame = index => ({
     type: types.SELECT_ANIMATION_FRAME,
     payload: index,
@@ -49,7 +53,7 @@ export const setIsPlaying = flag => ({
 });
 
 export const toggleReverse = () => ({
-    type: types.TOGGLE_REVERSE
+    type: types.TOGGLE_REVERSE,
 });
 
 export const setFps = fps => ({

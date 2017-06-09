@@ -26,12 +26,12 @@ export const frameToPicture = (frame) => {
 export const frameToSdk = (frame) => {
     const rows = [];
     let count = 0;
-    for (var i = 0; i < CANVAS_HEIGHT; i++) {
-        let columns = [];
-        for (var j = 0; j < CANVAS_WIDTH; j++) {
+    for (let i = 0; i < CANVAS_HEIGHT; i += 1) {
+        const columns = [];
+        for (let j = 0; j < CANVAS_WIDTH; j += 1) {
             let color = frame[count];
             color = `0x${color.substring(4, 6)}${color.substring(2, 4)}${color.substring(0, 2)}`;
-            columns.push(parseInt(color));
+            columns.push(parseInt(color, 16));
             count += 1;
         }
         rows.push(columns);
@@ -41,25 +41,27 @@ export const frameToSdk = (frame) => {
 
 export const compressAnimation = (animation) => {
     const compressedAnimation = [];
-        for (var index = animation.length - 1; index > 0; index--) {
-            const currentFrame = animation[index];
-            const previousFrame = animation[index - 1];
-            const compressedFrame = {};
-            for (var pixel in currentFrame) {
-                if (currentFrame[pixel] !== previousFrame[pixel]) {
-                    compressedFrame[pixel] = currentFrame[pixel];
-                }
+    for (let index = animation.length - 1; index > 0; index -= 1) {
+        const currentFrame = animation[index];
+        const previousFrame = animation[index - 1];
+        const compressedFrame = {};
+        for (const pixel in currentFrame) {
+            if (currentFrame[pixel] !== previousFrame[pixel]) {
+                compressedFrame[pixel] = currentFrame[pixel];
             }
-            compressedAnimation.unshift(compressedFrame);
         }
-        compressedAnimation.unshift(animation[0]);
-        return compressedAnimation;
+        compressedAnimation.unshift(compressedFrame);
+    }
+    compressedAnimation.unshift(animation[0]);
+    return compressedAnimation;
 };
 
 export const decompressAnimation = (compressedAnimation) => {
-        const decompressedAnimation = [compressedAnimation[0]];
-        for (var index = 1; index < compressedAnimation.length; index++) {
-            decompressedAnimation.push({ ...decompressedAnimation[index - 1], ...compressedAnimation[index] });
-        }
-        return decompressedAnimation;
+    const decompressedAnimation = [compressedAnimation[0]];
+    for (let index = 1; index < compressedAnimation.length; index += 1) {
+        decompressedAnimation.push(
+            { ...decompressedAnimation[index - 1], ...compressedAnimation[index] },
+        );
+    }
+    return decompressedAnimation;
 };

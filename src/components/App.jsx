@@ -21,7 +21,7 @@ const minimizeApp = () => {
 };
 
 const App = props => (
-    <div>
+    <div className="page">
         <div className="topBar">
             <span className="label">Razer Paint</span>
             <span className="button-container" style={{ float }}>
@@ -37,11 +37,15 @@ const App = props => (
             <Canvas />
             <div style={{ marginLeft: '5px', display: 'inline-flex' }}>
                 <ChromePicker
-                    color={props.brushColor}
-                    onChangeComplete={colorObject => props.setLongHexColor(colorObject.hex)}
-                    disableAlpha
+                  color={props.brushColor}
+                  onChangeComplete={colorObject => props.setLongHexColor(colorObject.hex)}
+                  disableAlpha
                 />
-                <PresetColorPicker brushColor={props.brushColor} presetColors={props.presetColors} setColor={props.setColor}/>
+                <PresetColorPicker
+                  brushColor={props.brushColor}
+                  presetColors={props.presetColors}
+                  setColor={props.setColor}
+                />
             </div>
         </div>
         <Animation
@@ -56,7 +60,9 @@ App.propTypes = {
     brushColor: PropTypes.string.isRequired,
     setColor: PropTypes.func.isRequired,
     animate: PropTypes.arrayOf(PropTypes.object).isRequired,
+    presetColors: PropTypes.arrayOf(PropTypes.string).isRequired,
     selectAnimationFrame: PropTypes.func.isRequired,
+    setLongHexColor: PropTypes.func.isRequired,
     selectedFrame: PropTypes.number.isRequired,
 };
 

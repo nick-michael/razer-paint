@@ -34,7 +34,7 @@ class Animate extends React.Component {
 
     render() {
         return (
-            <div className="frames" style={{ padding: '2px', display: 'flex', flexWrap: 'wrap', marginTop: '15px', height: '140px', border: '2px solid #3a3a3d', overflowY: 'scroll' }}>
+            <div className="frames">
                 {this.createFrames()}
             </div>
         );

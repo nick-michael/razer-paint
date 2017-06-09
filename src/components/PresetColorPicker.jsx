@@ -1,18 +1,12 @@
-import * as os from 'os';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PresetColorPicker = props => {
-    const renderColors = () => {
-        return props.presetColors.map((color) => {
-            return (
-                <div className="color-spot-container">
-                    <div className={`color-spot ${color === props.brushColor ? 'color-spot__selected' : ''}`} style={{ background: `#${color}` }} onClick={() => props.setColor(color)} />
-                </div>
-            );
-        });
-    };
+const PresetColorPicker = (props) => {
+    const renderColors = () => props.presetColors.map(color => (
+        <div className="color-spot-container">
+            <div className={`color-spot ${color === props.brushColor ? 'color-spot__selected' : ''}`} style={{ background: `#${color}` }} onClick={() => props.setColor(color)} />
+        </div>
+            ));
 
     return (
         <div className="preset-color-picker">

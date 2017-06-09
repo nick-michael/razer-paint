@@ -8,6 +8,7 @@ const defaultState = {
     redoFrames: [],
     animate: [],
     selectedFrame: null,
+    isEditing: false,
     fps: 30,
     isPlaying: false,
     isReversed: false,
@@ -29,14 +30,28 @@ export default (state = defaultState, action) => {
                 frames: state.frames.concat(state.redoFrames.slice(-1)[0]),
                 redoFrames: state.redoFrames.slice(0, -1),
             };
-        case types.PAINT_FRAME:
+        case types.PAINT_FRAME: {
+            if (state.isEditing) {
+                const newAnimation = [...state.animate];
+                newAnimation[state.selectedFrame] = action.payload;
+                return { ...state, frame: action.payload, redoFrames: [], animate: newAnimation };
+            }
             return { ...state, frame: action.payload, redoFrames: [] };
+        }
         case types.KEYFRAME:
             return { ...state, frames: state.frames.concat(state.frame) };
         case types.CAPTURE:
             return { ...state, animate: state.animate.concat(state.frame) };
+        case types.TOGGLE_EDITING:
+            return { ...state, isEditing: !state.isEditing };
         case types.SELECT_ANIMATION_FRAME:
-            return { ...state, frame: state.animate[action.payload], frames: state.frames.concat(state.frame), selectedFrame: action.payload };
+            return {
+                ...state,
+                frame: state.animate[action.payload],
+                frames: state.frames.concat(state.animate[action.payload]),
+                redoFrames: [],
+                selectedFrame: action.payload,
+            };
         case types.DELETE_FRAME:
             return { ...state,
                 animate: state.animate.filter((e, i) => (i !== state.selectedFrame)),

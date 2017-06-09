@@ -9,15 +9,22 @@ let mainWindow = null;
 app.on('ready', () => {
   // creates a new browser window
     mainWindow = new BrowserWindow({
-        width: 1020,
+        width: 981,
+        minWidth: 981,
         height: 442,
-        resizable: process.env.NODE_ENV === 'development',
+        minHeight: 442,
         frame: false,
+        show: false,
+        backgroundColor: '#3a3a3d'
     });
   // load the file
     mainWindow.loadURL('http://localhost:8081/');
   // Register window events
     mainWindow.on('closed', () => {
         mainWindow = null;
+    });
+
+    mainWindow.once('ready-to-show', () => {
+      mainWindow.show();
     });
 });

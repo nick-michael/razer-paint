@@ -17,7 +17,7 @@ export const saveFile = (content) => {
             animate: compressedAnimation,
         });
 
-        const suffexedFileName = fileName.substr(-4) === '.rzp' ? fileName : `${fileName}.rzp`;        
+        const suffexedFileName = fileName.substr(-4) === '.rzp' ? fileName : `${fileName}.rzp`;
         fs.writeFile(suffexedFileName, saveData, (err) => {
             if (err) {
                 alert(`An error ocurred creating the file ${err.message}`);
