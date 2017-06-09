@@ -21,7 +21,7 @@ const ChromaSDK = {
     init(port, details, timeout = 10000) {
         const chromaSDK = this;
         const request = new XMLHttpRequest();
-        request.open('POST', `//localhost:${port}/razer/chromasdk`, true);
+        request.open('POST', `http://localhost:${port}/razer/chromasdk`, true);
 
         request.setRequestHeader('content-type', 'application/json');
 
