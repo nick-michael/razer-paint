@@ -6,6 +6,15 @@ import { BRUSH, PICKER, ERASER, FILL } from '../constants/tools';
 
 import { saveFile, openFile } from '../utils/fileStytem';
 
+const getEditClassName = (isSelected, isEditing) => {
+    if (!isSelected) {
+        return '';
+    } else if (isEditing) {
+        return 'toolbar-item-icon__selected';
+    }
+    return 'toolbar-item-icon__available';
+};
+
 const Toolbar = props => (
     <div>
         <div className={`toolbar ${props.isPlaying ? 'toolbar-disabled-playing' : ''}`} style={{ marginBottom: '4px' }}>
@@ -54,9 +63,9 @@ const Toolbar = props => (
                     <icons.Capture />
                 </div>
             </div>
-            <div className="toolbar-item" onClick={props.toggleEditing}>
+            <div className="toolbar-item" onClick={typeof props.selectedFrame === 'number' && props.toggleEditing}>
                 <div className="tooltip">Edit Frame</div>
-                <div className={`toolbar-item-icon ${typeof props.selectedFrame !== 'number' ? '' : props.isEditing ? 'toolbar-item-icon__selected' : 'toolbar-item-icon__available'}`}>
+                <div className={`toolbar-item-icon ${getEditClassName(typeof props.selectedFrame === 'number', props.isEditing)}`}>
                     <icons.Edit />
                 </div>
             </div>

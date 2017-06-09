@@ -49,6 +49,7 @@ const App = props => (
             </div>
         </div>
         <Animation
+          isPlaying={props.isPlaying}
           frames={props.animate}
           selectAnimationFrame={props.selectAnimationFrame}
           selectedFrame={props.selectedFrame}
@@ -64,6 +65,7 @@ App.propTypes = {
     selectAnimationFrame: PropTypes.func.isRequired,
     setLongHexColor: PropTypes.func.isRequired,
     selectedFrame: PropTypes.number.isRequired,
+    isPlaying: PropTypes.bool.isRequired,
 };
 
 export default App;

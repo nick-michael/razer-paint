@@ -47,6 +47,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
 const mergeProps = (stateProps, dispatchProps) => {
     const playAnimation = (reverseOverride) => {
         const isReversed = typeof reverseOverride === 'boolean' ? reverseOverride : stateProps.isReversed;
+        dispatchProps.selectAnimationFrame(null);
         dispatchProps.setIsPlaying(true);
 
         // Avoid putting logic inside the intervals to optimise performace
@@ -81,7 +82,6 @@ const mergeProps = (stateProps, dispatchProps) => {
     };
 
     const pauseAnimation = () => {
-        console.log('pausing!');
         dispatchProps.setIsPlaying(false);
         clearInterval(interval);
     };

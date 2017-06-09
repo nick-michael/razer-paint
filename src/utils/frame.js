@@ -45,11 +45,11 @@ export const compressAnimation = (animation) => {
         const currentFrame = animation[index];
         const previousFrame = animation[index - 1];
         const compressedFrame = {};
-        for (const pixel in currentFrame) {
+        Object.keys(currentFrame).foreach((pixel) => {
             if (currentFrame[pixel] !== previousFrame[pixel]) {
                 compressedFrame[pixel] = currentFrame[pixel];
             }
-        }
+        });
         compressedAnimation.unshift(compressedFrame);
     }
     compressedAnimation.unshift(animation[0]);

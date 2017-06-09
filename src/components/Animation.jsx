@@ -23,7 +23,7 @@ class Animate extends React.Component {
 
     createFrames() {
         return this.props.frames.map((frame, index) => (
-            <div className={`frame${this.props.selectedFrame === index ? ' frame__selected' : ''}`} onClick={() => this.props.selectAnimationFrame(index)}>
+            <div className={`frame${this.props.selectedFrame === index ? ' frame__selected' : ''}`} onClick={() => !this.props.isPlaying && this.props.selectAnimationFrame(index)}>
                 <canvas ref={(c) => { this[`animate-frame-${index}`] = c; }} id={`animate-frame-${index}`} width={CANVAS_WIDTH * PIXEL_SIZE} height={CANVAS_HEIGHT * PIXEL_SIZE} />
                 <div style={{ textAlign: 'center', color: '#FFF' }}>
                     {index + 1}
@@ -45,6 +45,7 @@ Animate.propTypes = {
     frames: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectAnimationFrame: PropTypes.func.isRequired,
     selectedFrame: PropTypes.number.isRequired,
+    isPlaying: PropTypes.bool.isRequired,
 };
 
 export default Animate;

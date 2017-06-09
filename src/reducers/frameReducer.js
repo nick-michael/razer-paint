@@ -44,14 +44,18 @@ export default (state = defaultState, action) => {
             return { ...state, animate: state.animate.concat(state.frame) };
         case types.TOGGLE_EDITING:
             return { ...state, isEditing: !state.isEditing };
-        case types.SELECT_ANIMATION_FRAME:
-            return {
-                ...state,
-                frame: state.animate[action.payload],
-                frames: state.frames.concat(state.animate[action.payload]),
-                redoFrames: [],
-                selectedFrame: action.payload,
-            };
+        case types.SELECT_ANIMATION_FRAME: {
+            if (typeof action.payload === 'number') {
+                return {
+                    ...state,
+                    frame: state.animate[action.payload],
+                    frames: state.frames.concat(state.animate[action.payload]),
+                    redoFrames: [],
+                    selectedFrame: action.payload,
+                };
+            }
+            return { ...state, selectedFrame: null };
+        }
         case types.DELETE_FRAME:
             return { ...state,
                 animate: state.animate.filter((e, i) => (i !== state.selectedFrame)),
