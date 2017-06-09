@@ -45,7 +45,7 @@ export const compressAnimation = (animation) => {
         const currentFrame = animation[index];
         const previousFrame = animation[index - 1];
         const compressedFrame = {};
-        Object.keys(currentFrame).foreach((pixel) => {
+        Object.keys(currentFrame).forEach((pixel) => {
             if (currentFrame[pixel] !== previousFrame[pixel]) {
                 compressedFrame[pixel] = currentFrame[pixel];
             }
