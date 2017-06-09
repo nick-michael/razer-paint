@@ -1,6 +1,7 @@
 import * as types from '../actions/actionTypes';
 import { initializeFrame } from '../utils/frame';
 
+const MAX_UNDO = -40;
 const frame = initializeFrame();
 const defaultState = {
     frame,
@@ -40,7 +41,7 @@ export default (state = defaultState, action) => {
             return { ...state, frame: action.payload, redoFrames: [] };
         }
         case types.KEYFRAME:
-            return { ...state, frames: state.frames.concat(state.frame) };
+            return { ...state, frames: state.frames.slice(MAX_UNDO).concat(state.frame) };
         case types.CAPTURE:
             return { ...state, animate: state.animate.concat(state.frame) };
         case types.TOGGLE_EDITING:
@@ -50,7 +51,7 @@ export default (state = defaultState, action) => {
                 return {
                     ...state,
                     frame: state.animate[action.payload],
-                    frames: state.frames.concat(state.animate[action.payload]),
+                    frames: state.frames.slice(MAX_UNDO).concat(state.animate[action.payload]),
                     redoFrames: [],
                     selectedFrame: action.payload,
                 };
@@ -84,7 +85,7 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 frame: state.animate[state.selectedFrame],
-                frames: state.frames.concat(state.frame),
+                frames: state.frames.slice(MAX_UNDO).concat(state.frame),
             };
         case types.LOAD_FILE:
             return {
