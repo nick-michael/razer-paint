@@ -55,6 +55,19 @@ const Toolbar = props => (
                     <icons.Redo />
                 </div>
             </div>
+            <div className="toolbar-spacer" />
+            <div className="toolbar-item toolbar-item-can-disable" onClick={() => typeof props.selectedFrame === 'number' && props.copy()}>
+                <div className="tooltip">Copy</div>
+                <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
+                    <icons.Copy />
+                </div>
+            </div>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={() => typeof props.selectedFrame === 'number' && props.clipboard && props.paste()}>
+                <div className="tooltip">Paste</div>
+                <div className={`toolbar-item-icon toolbar-item-icon__${props.clipboard ? 'available' : ''}`}>
+                    <icons.Paste />
+                </div>
+            </div>
         </div>
         <div className={`toolbar ${props.isPlaying ? 'toolbar-disabled-playing' : ''}`}>
             <div className="toolbar-item toolbar-item-can-disable" onClick={props.capture}>

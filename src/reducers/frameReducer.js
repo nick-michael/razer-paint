@@ -6,12 +6,13 @@ const defaultState = {
     frame,
     frames: [frame],
     redoFrames: [],
-    animate: [],
-    selectedFrame: null,
-    isEditing: false,
+    animate: [frame],
+    selectedFrame: 0,
+    isEditing: true,
     fps: 30,
     isPlaying: false,
     isReversed: false,
+    clipboard: null,
 };
 
 export default (state = defaultState, action) => {
@@ -56,13 +57,20 @@ export default (state = defaultState, action) => {
             }
             return { ...state, selectedFrame: null };
         }
-        case types.DELETE_FRAME:
+        case types.DELETE_FRAME: {
+            const withoutFrame = state.animate.filter((e, i) => (i !== state.selectedFrame));
+            const newAnimation = withoutFrame.length ? state.animate.filter((e, i) => (i !== state.selectedFrame)) : [frame];
+
+            const selectedFrame = state.selectedFrame >= state.animate.length - 1
+                    ? Math.max(state.selectedFrame - 1, 0)
+                    : state.selectedFrame;
+
             return { ...state,
-                animate: state.animate.filter((e, i) => (i !== state.selectedFrame)),
-                selectedFrame: state.selectedFrame >= state.animate.length - 1
-                    ? null
-                    : state.selectedFrame,
+                animate: newAnimation,
+                selectedFrame,
+                frame: newAnimation[selectedFrame],
             };
+        }
         case types.INSERT_FRAME:
             return {
                 ...state,
@@ -99,6 +107,11 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 fps: action.payload,
+            };
+        case types.COPY:
+            return {
+                ...state,
+                clipboard: state.frame,
             };
         default:
             return state;

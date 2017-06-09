@@ -60,3 +60,7 @@ export const setFps = fps => ({
     type: types.SET_FPS,
     payload: fps,
 });
+
+export const copy = () => ({
+    type: types.COPY,
+});

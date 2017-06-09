@@ -2,6 +2,7 @@
 export const SELECT_TOOL = 'SELECT_TOOL';
 export const SET_IS_PAINTING = 'SET_IS_PAINTING';
 export const SET_COLOR = 'SET_COLOR';
+export const COPY = 'COPY';
 
 // Frame Actions
 export const UNDO = 'UNDO';

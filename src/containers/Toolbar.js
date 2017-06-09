@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
         fps,
         isPlaying,
         isReversed,
+        clipboard,
     } = state.frames;
 
     const canUndo = frames.length > 1;
@@ -35,6 +36,7 @@ const mapStateToProps = (state) => {
         fps,
         isPlaying,
         isReversed,
+        clipboard,
         saveState,
     };
 };
@@ -91,6 +93,12 @@ const mergeProps = (stateProps, dispatchProps) => {
         pauseAnimation();
         dispatchProps.loadFile(file);
     };
+
+    const paste = () => {
+        dispatchProps.keyframe();
+        dispatchProps.paintFrame(stateProps.clipboard);
+    };
+
     return {
         ...stateProps,
         ...dispatchProps,
@@ -99,6 +107,7 @@ const mergeProps = (stateProps, dispatchProps) => {
         pauseAnimation,
         updateFps,
         loadAnimation,
+        paste,
     };
 };
 

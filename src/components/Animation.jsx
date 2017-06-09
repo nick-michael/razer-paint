@@ -5,8 +5,15 @@ import { frameToPicture, CANVAS_WIDTH, CANVAS_HEIGHT } from '../utils/frame';
 const PIXEL_SIZE = 4;
 
 class Animate extends React.Component {
+    componentDidMount() {
+        this.renderFrames();
+    }
 
     componentDidUpdate() {
+        this.renderFrames();
+    }
+
+    renderFrames() {
         for (let frameCount = 0; frameCount < this.props.frames.length; frameCount += 1) {
             const drawingCanvas = this[`animate-frame-${frameCount}`];
             const context = drawingCanvas.getContext('2d');
