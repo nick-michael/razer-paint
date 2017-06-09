@@ -18,7 +18,7 @@ app.on('ready', () => {
         backgroundColor: '#3a3a3d'
     });
   // load the file
-    mainWindow.loadURL('http://localhost:8081/');
+    mainWindow.loadURL(`file://${__dirname}/dist/index.html`);
   // Register window events
     mainWindow.on('closed', () => {
         mainWindow = null;

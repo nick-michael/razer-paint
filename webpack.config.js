@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 module.exports = {
     entry: [
@@ -27,7 +28,11 @@ module.exports = {
             filename: 'index.html',
             template: './src/index.html'
         }),
-        new ExtractTextPlugin('app.min.css')
+        new ExtractTextPlugin('app.min.css'),
+		new WebpackShellPlugin({
+			onBuildStart: [`echo Webpack is running in ${process.env.NODE_ENV}`],
+			onBuildEnd: ['npm run start:electron']
+		})
     ],
 
     module: {
