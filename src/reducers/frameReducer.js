@@ -31,7 +31,7 @@ export default (state = defaultState, action) => {
                 redoFrames: state.redoFrames.slice(0, -1),
             };
         case types.PAINT_FRAME: {
-            if (state.isEditing) {
+            if (state.isEditing && !state.isPlaying) {
                 const newAnimation = [...state.animate];
                 newAnimation[state.selectedFrame] = action.payload;
                 return { ...state, frame: action.payload, redoFrames: [], animate: newAnimation };
