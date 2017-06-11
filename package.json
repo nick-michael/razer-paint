@@ -1,6 +1,7 @@
 {
   "name": "razer-paint",
-  "version": "0.0.1",
+  "productName": "Razer Paint",
+  "version": "1.0.0",
   "description": "Razer Paint For Chroma",
   "main": "main.js",
   "scripts": {
@@ -9,12 +10,13 @@
     "start:electron": "electron .",
     "build": "webpack",
     "_build:watch": "npm run build -- --watch",
+    "package:win": "IF exist \"dist\\app\" ( rmdir \"dist\\app\" /S /Q ) && mkdir \"dist\\app\" && node ./build/buildscript.js",
+    "installer:win": "node ./build/installer.js",
     "lint": "eslint **/ --ext .jsx,.js --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "cross-env": "^5.0.0",
-    "electron": "^1.6.8",
     "prop-types": "^15.5.10",
     "react": "15.5.4",
     "react-color": "^2.11.7",
@@ -33,6 +35,9 @@
     "babel-register": "^6.18.0",
     "better-npm-run": "0.0.5",
     "css-loader": "^0.23.0",
+    "electron": "^1.6.8",
+    "electron-packager": "^8.7.1",
+    "electron-winstaller": "^2.6.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-loader": "^1.7.1",
