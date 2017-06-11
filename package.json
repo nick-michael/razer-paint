@@ -3,15 +3,16 @@
   "productName": "Razer Paint",
   "version": "1.0.0",
   "description": "Razer Paint For Chroma",
+  "author": "Nick Michael",
   "main": "main.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development npm-run-all --parallel --race _build:watch",
     "start:prod": "cross-env NODE_ENV=production webpack",
     "start:electron": "electron .",
-    "build": "webpack",
-    "_build:watch": "npm run build -- --watch",
-    "package:win": "IF exist \"dist\\app\" ( rmdir \"dist\\app\" /S /Q ) && mkdir \"dist\\app\" && node ./build/buildscript.js",
-    "installer:win": "node ./build/installer.js",
+    "build:webapp": "cross-env NODE_ENV=production webpack",
+    "_build:watch": "npm run build:webapp -- --watch",
+    "pack": "build --dir",
+    "build:win": "node ./build/buildscript.js",
     "lint": "eslint **/ --ext .jsx,.js --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix"
   },
@@ -36,6 +37,7 @@
     "better-npm-run": "0.0.5",
     "css-loader": "^0.23.0",
     "electron": "^1.6.8",
+    "electron-builder": "^18.6.2",
     "electron-packager": "^8.7.1",
     "electron-winstaller": "^2.6.2",
     "eslint": "^3.19.0",
@@ -71,7 +73,6 @@
     "electron",
     "paint"
   ],
-  "author": "Nick Michael",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nick-michael/razer-paint/issues"
