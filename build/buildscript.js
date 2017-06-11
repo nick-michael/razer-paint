@@ -1,7 +1,7 @@
-const packager = require('electron-packager');
+const builder = require('electron-builder');
 const config = require('./config');
 
-packager(config, (err) => {
+builder.build(config, (err) => {
     if (err) {
         throw err;
     }
