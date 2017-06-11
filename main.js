@@ -22,8 +22,9 @@ app.on('ready', () => {
   // Register window events
     mainWindow.on('closed', () => {
         mainWindow = null;
+        app.quit();
     });
-
+    
     mainWindow.once('ready-to-show', () => {
       mainWindow.show();
     });
