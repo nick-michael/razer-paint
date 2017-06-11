@@ -1,0 +1,33 @@
+.update-box {
+    position: absolute;
+    z-index: 200;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    justify-content: center;
+    height: 30vh;
+    width: 60vw;
+    background: $color-mid-grey;
+    border: 6px solid $color-dark-grey;
+    border-radius: 3px;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+
+    .update-message {
+        margin: 20px;
+        color: $color-white-grey;
+    }
+
+    .update-button-ok {
+        padding: 7px 20px;
+        background: $color-white-grey;
+        border-radius: 3px;
+
+        &:hover {
+            background: $color-razer-green;
+        }
+    }
+}
