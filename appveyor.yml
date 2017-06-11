@@ -11,4 +11,5 @@ install:
   - npm install
 
 build_script:
+  - ps: npm run build:webapp:prod
   - ps: npm run build:win
