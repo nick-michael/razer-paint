@@ -10,6 +10,9 @@ install:
   # install modules
   - npm install
 
+only_commits:
+  message: /build-release/
+
 build_script:
   - ps: npm run build:webapp:prod
   - ps: npm run build:win
