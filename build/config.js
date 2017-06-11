@@ -4,21 +4,21 @@ module.exports = {
     config: {
         asar: true,
         extraFiles: [
-            "animations"
+            'animations',
         ],
         win: {
             files: [
-                "**/*",
-                "!src",
-                "!assets",
-                "!build",
-                "!animations",
-                "!.env",
-                "!.*",
-                "!webpack.config.js",
-                "!dist/win-unpacked",
-                "dist/app.min.css"
-            ]
-        }
-    }
+                '**/*',
+                '!src',
+                '!assets',
+                '!build',
+                '!animations',
+                '!.env',
+                '!.*',
+                '!webpack.config.js',
+                '!dist/win-unpacked',
+                'dist/app.min.css',
+            ],
+        },
+    },
 };

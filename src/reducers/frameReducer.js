@@ -60,7 +60,9 @@ export default (state = defaultState, action) => {
         }
         case types.DELETE_FRAME: {
             const withoutFrame = state.animate.filter((e, i) => (i !== state.selectedFrame));
-            const newAnimation = withoutFrame.length ? state.animate.filter((e, i) => (i !== state.selectedFrame)) : [frame];
+            const newAnimation = withoutFrame.length
+                ? state.animate.filter((e, i) => (i !== state.selectedFrame))
+                : [frame];
 
             const selectedFrame = state.selectedFrame >= state.animate.length - 1
                     ? Math.max(state.selectedFrame - 1, 0)

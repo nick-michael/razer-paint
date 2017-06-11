@@ -1,6 +1,6 @@
 import { compressAnimation, decompressAnimation } from './frame';
 
-const { dialog } = require('electron').remote;
+const { dialog } = require('electron').remote; // eslint-disable-line import/no-extraneous-dependencies
 const fs = require('fs');
 
 export const saveFile = (content) => {

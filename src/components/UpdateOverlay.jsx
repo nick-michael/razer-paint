@@ -9,7 +9,7 @@ const UpdateOverlay = props => (
 );
 
 UpdateOverlay.propTypes = {
-    close: PropTypes.func.isRequired
+    close: PropTypes.func.isRequired,
 };
 
 export default UpdateOverlay;

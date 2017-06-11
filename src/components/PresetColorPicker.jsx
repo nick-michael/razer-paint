@@ -15,10 +15,12 @@ const PresetColorPicker = (props) => {
     );
 };
 
+/* eslint-disable react/no-unused-prop-types */
 PresetColorPicker.propTypes = {
     brushColor: PropTypes.string.isRequired,
     presetColors: PropTypes.arrayOf(PropTypes.string).isRequired,
     setColor: PropTypes.func.isRequired,
 };
+/* eslint-enable react/no-unused-prop-types */
 
 export default PresetColorPicker;
