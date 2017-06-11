@@ -16,3 +16,16 @@ only_commits:
 build_script:
   - ps: npm run build:webapp:prod
   - ps: npm run build:win
+
+branches:
+  only:
+  - master
+
+pull_requests:
+  do_not_increment_build_number: true
+
+environment:
+  GH_TOKEN:
+    secure: D04x8djK8cRtoR47RIi3HC3FArLnefMpk368HefDJoVwEvYUilileOceRA6gkBZ7
+
+skip_tags: true
