@@ -1,31 +1,18 @@
 version: 1.0.{build}
-
-environment:
-  nodejs_version: "6"
-
-# Install scripts. (runs after repo cloning)
 install:
-  # Get the latest stable version of Node.js or io.js
-  - ps: Install-Product node $env:nodejs_version
-  # install modules
+  - ps: Install-Product node 6
   - npm install
-
-only_commits:
-  message: /build-release/
-
-build_script:
-  - ps: npm run build:webapp:prod
-  - ps: npm run build:win
-
+pull_requests:
+  do_not_increment_build_number: true
 branches:
   only:
   - master
-
-pull_requests:
-  do_not_increment_build_number: true
-
+skip_tags: false
 environment:
   GH_TOKEN:
     secure: D04x8djK8cRtoR47RIi3HC3FArLnefMpk368HefDJoVwEvYUilileOceRA6gkBZ7
+build_script:
+- ps: >-
+    npm run build:webapp:prod
 
-skip_tags: true
+    npm run build:win
