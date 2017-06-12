@@ -11,6 +11,7 @@ import UpdateOverlay from './UpdateOverlay';
 import PresetColorPicker from './PresetColorPicker';
 import * as icons from '../icons/icons';
 import { version } from '../../package.json';
+import * as keyCodes from '../constants/keyCodes';
 
 const float = os.platform() === 'darwin' ? 'left' : 'right';
 
@@ -50,7 +51,31 @@ export default class App extends React.Component {
                 this.setState({ showUpdateOverlay: true });
             }
         });
+        document.addEventListener('keydown', this.handleKeyPress);
     }
+
+
+    handleKeyPress = (event) => {
+        const eventString = `${event.shiftKey ? 'shift+' : ''}${event.ctrlKey ? 'ctrl+' : ''}${event.altKey ? 'alt+' : ''}${event.keyCode}`;
+        this.keyCodeActionMap()[eventString] &&
+        this.keyCodeActionMap()[eventString]();
+    };
+
+    paste = () => {
+        this.props.keyframe();
+        this.props.paintFrame(this.props.clipboard);
+    }
+
+
+    keyCodeActionMap = () => ({
+        [keyCodes.SPACEBAR]: this.props.toggleIsPlaying,
+        [keyCodes.ARROW_LEFT]: !this.props.isPlaying && this.props.previousFrame,
+        [keyCodes.ARROW_RIGHT]: !this.props.isPlaying && this.props.nextFrame,
+        [`ctrl+${keyCodes.Z}`]: !this.props.isPlaying && this.props.undo,
+        [`shift+ctrl+${keyCodes.Z}`]: !this.props.isPlaying && this.props.redo,
+        [`ctrl+${keyCodes.C}`]: !this.props.isPlaying && this.props.copy,
+        [`ctrl+${keyCodes.V}`]: !this.props.isPlaying && this.paste,
+    });
 
     closeUpdateOverlay = () => {
         this.setState({ showUpdateOverlay: false });
@@ -112,10 +137,19 @@ export default class App extends React.Component {
 App.propTypes = {
     brushColor: PropTypes.string.isRequired,
     setColor: PropTypes.func.isRequired,
+    clipboard: PropTypes.objectOf(PropTypes.string).isRequired,
     animate: PropTypes.arrayOf(PropTypes.object).isRequired,
     presetColors: PropTypes.arrayOf(PropTypes.string).isRequired,
     selectAnimationFrame: PropTypes.func.isRequired,
     setLongHexColor: PropTypes.func.isRequired,
+    paintFrame: PropTypes.func.isRequired,
+    keyframe: PropTypes.func.isRequired,
+    toggleIsPlaying: PropTypes.func.isRequired,
+    nextFrame: PropTypes.func.isRequired,
+    previousFrame: PropTypes.func.isRequired,
+    undo: PropTypes.func.isRequired,
+    redo: PropTypes.func.isRequired,
+    copy: PropTypes.func.isRequired,
     selectedFrame: PropTypes.number.isRequired,
     isPlaying: PropTypes.bool.isRequired,
 };

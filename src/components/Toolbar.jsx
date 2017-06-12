@@ -56,9 +56,9 @@ const Toolbar = props => (
                 </div>
             </div>
             <div className="toolbar-spacer" />
-            <div className="toolbar-item toolbar-item-can-disable" onClick={() => typeof props.selectedFrame === 'number' && props.copy()}>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={props.copy}>
                 <div className="tooltip">Copy</div>
-                <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
+                <div className="toolbar-item-icon toolbar-item-icon__available">
                     <icons.Copy />
                 </div>
             </div>

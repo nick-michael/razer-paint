@@ -2,17 +2,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { setColor } from '../actions/canvasActions';
-import { selectAnimationFrame } from '../actions/frameActions';
+import * as frameActions from '../actions/frameActions';
 import App from '../components/App';
 
 const mapStateToProps = (state) => {
     const { brushColor, presetColors } = state.canvas;
-    const { animate, selectedFrame, isPlaying } = state.frames;
-    return { brushColor, presetColors, animate, selectedFrame, isPlaying };
+    const { animate, selectedFrame, isPlaying, clipboard } = state.frames;
+    return { brushColor, presetColors, animate, selectedFrame, isPlaying, clipboard };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(
-    { setColor, selectAnimationFrame },
+    { setColor, ...frameActions },
     dispatch,
 );
 

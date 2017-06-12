@@ -33,7 +33,6 @@ const mergeProps = (stateProps, dispatchProps) => {
     const fill = (pixel, color) => {
         const fillColor = color || stateProps.brushColor;
         const newFrame = Object.assign({}, stateProps.frame);
-        console.log(stateProps.frame, Object.keys(stateProps.frame));
         Object.keys(stateProps.frame).forEach((index) => {
             if (newFrame[index] === stateProps.frame[pixel]) {
                 newFrame[index] = fillColor;
