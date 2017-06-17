@@ -7,13 +7,13 @@ import { frameToSdk, CANVAS_WIDTH, CANVAS_HEIGHT } from '../utils/frame';
 import ChromaSDK from '../utils/chroma';
 
 export default class Canvas extends React.Component {
-    componentDidMount() {
-        window.addEventListener('mouseup', () => this.props.handleMouseUp());
+    componentWillMount() {
+        window.addEventListener('mouseup', this.props.handleMouseUp);
         ChromaSDK.init(54235);
     }
 
     makePixel(count) {
-        return (<div key={count} onMouseUp={e => this.props.handlePixelMouseUp(e, `${count}`)} onMouseDown={e => this.props.handlePixelMouseDown(e, `${count}`)} onMouseOver={e => this.props.handleMouseOver(e, `${count}`)}><Pixel color={this.props.frame[`${count}`]} /></div>);
+        return (<div className="pixel-container" key={count} onMouseUp={e => this.props.handlePixelMouseUp(e, `${count}`)} onMouseDown={e => this.props.handlePixelMouseDown(e, `${count}`)} onMouseOver={e => this.props.handleMouseOver(e, `${count}`)}><Pixel color={this.props.frame[`${count}`]} /></div>);
     }
 
     render() {

@@ -65,14 +65,11 @@ const mergeProps = (stateProps, dispatchProps) => {
     };
 
     const handleMouseUp = () => {
-        stateProps.isPainting &&
-        dispatchProps.setIsPainting(false) &&
-        dispatchProps.keyframe();
+        stateProps.isPainting && dispatchProps.setIsPainting(false);
+        stateProps.isPainting && dispatchProps.keyframe();
     };
 
     const mergedProps = {
-        canUndo: stateProps.canUndo,
-        canRedo: stateProps.canRedo,
         frame: stateProps.frame,
         tool: stateProps.tool,
         handlePixelMouseDown,
