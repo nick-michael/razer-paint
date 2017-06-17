@@ -10,7 +10,7 @@ import * as icons from '../icons/icons';
 import { version } from '../../package.json';
 import * as keyCodes from '../constants/keyCodes';
 import { checkForUpdates } from '../utils/update';
-import { float, handleClose, handleMinimize } from '../utils/app';
+import { getFloat, handleClose, handleMinimize } from '../utils/app';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -70,11 +70,11 @@ export default class App extends React.Component {
             <div className="page">
                 <div className="topBar">
                     <span className="label">Razer Paint</span>
-                    <span className="button-container" style={{ float }}>
-                        <span className="button button-close" style={{ float }} onClick={handleClose}>
+                    <span className="button-container" style={{ float: getFloat() }}>
+                        <span className="button button-close" style={{ float: getFloat() }} onClick={handleClose}>
                             <div className="button-icon"><icons.Close /></div>
                         </span>
-                        <span className="button button-minimize" style={{ float }} onClick={handleMinimize}>
+                        <span className="button button-minimize" style={{ float: getFloat() }} onClick={handleMinimize}>
                             <div className="button-icon"><icons.Minimize /></div>
                         </span>
                     </span>

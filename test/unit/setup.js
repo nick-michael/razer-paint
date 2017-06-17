@@ -31,7 +31,18 @@ const electron = {
     },
 };
 
-const moduleStubs = { electron };
+let platform = 'win32';
+
+const os = {
+    platform: () => (platform),
+    setPlatform: (newPlatform) => {platform = newPlatform},
+    // setPlatform: (newPlatform) => {platform = newPlatform},
+    resetBehavior() {
+        // Using platform stub here does not work - not sure why
+    },
+}
+
+const moduleStubs = { electron, os };
 
 global.window.require = (name) => {
     const module = moduleStubs[name];

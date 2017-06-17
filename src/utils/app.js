@@ -1,7 +1,10 @@
-import * as os from 'os';
-import { remote } from 'electron'; // eslint-disable-line import/no-extraneous-dependencies
+const { platform } = window.require('os');
+const { remote } = window.require('electron'); // eslint-disable-line import/no-extraneous-dependencies
 
-export const float = os.platform() === 'darwin' ? 'left' : 'right';
+export const getFloat = () => {
+    const float = platform() === 'darwin' ? 'left' : 'right';
+    return float;
+};
 
 export const handleMinimize = () => {
     remote.getCurrentWindow().minimize();

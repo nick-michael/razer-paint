@@ -45,15 +45,6 @@ describe('Canvas Container', () => {
         sandbox.restore();
     });
 
-    // describe('paintPixel', () => {
-    //     it('should replace the pixel color with the provided color', () => {
-    //         const canvasComponent = createCanvasComponent();
-    //         canvasComponent.props().paintPixel(0, 'fafafa');
-
-    //         sinon.assert.calledWith(paintFrameSpy, { '0': 'fafafa' });
-    //     });
-    // });
-
     describe('Animation Not Playing', () => {
         describe('handlePixelMouseDown', () => {
             it('should paint a pixel with the state color on left click if brush is selected', () => {

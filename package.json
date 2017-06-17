@@ -76,6 +76,11 @@
   "nyc": {
     "extension": [
       ".jsx"
+    ],
+    "exclude": [
+      "src/actions/*.js",
+      "src/utils/chroma.js",
+      "test/**"
     ]
   },
   "repository": {

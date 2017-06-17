@@ -14,6 +14,6 @@ describe('UpdateOverlay Component', () => {
         const updateOverlay = shallow(<UpdateOverlay close={closeStub} />);
         updateOverlay.find('.update-button-ok').at(0).props().onClick();
         sinon.assert.calledOnce(closeStub);
-        closeStub.reset();
+        closeStub.resetBehavior();
     });
 });
