@@ -8,6 +8,11 @@ import Toolbar from '../components/Toolbar';
 let interval;
 let count = 0;
 
+// Exported for use in test scenario - find a better way to do this?
+export const setCount = (number) => {
+    count = number;
+};
+
 const mapStateToProps = (state) => {
     const { tool } = state.canvas;
     const {
@@ -54,7 +59,6 @@ const mergeProps = (stateProps, dispatchProps) => {
 
         // Avoid putting logic inside the intervals to optimise performace
         // for higher framerates
-
         if (!isReversed) {
             interval = setInterval(() => {
                 count %= stateProps.animate.length;

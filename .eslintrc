@@ -6,10 +6,22 @@
         "es6": true,
         "browser": true
     },
+    "plugins": [
+        "mocha"
+    ],
     "rules": {
         "indent": ["error", 4, {"SwitchCase": 1}],
         "jsx-a11y/no-static-element-interactions": 0,
         "react/jsx-indent": [2, 4],
-        "no-unused-expressions": [2, { "allowShortCircuit": true }]
+        "no-unused-expressions": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    },
+    "globals": {
+        "describe": true,
+        "it": true,
+        "sinon": true,
+        "expect": true,
+        "beforeEach": true,
+        "afterEach": true
     }
 }

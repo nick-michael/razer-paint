@@ -14,7 +14,9 @@
     "pack": "build --dir",
     "build:win": "node ./build/buildscript.js",
     "lint": "eslint **/ --ext .jsx,.js --ignore-path .gitignore",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "test": "cross-env NODE_ENV=test NODE_PATH=./src nyc --require babel-core/register node_modules/.bin/_mocha --require test/unit/setup.js -- 'test/unit/**/*.js*'",
+    "coverage-report": "nyc report --reporter=lcov"
   },
   "dependencies": {
     "cross-env": "^5.0.0",
@@ -35,33 +37,51 @@
     "babel-preset-stage-0": "^6.16.0",
     "babel-register": "^6.18.0",
     "better-npm-run": "0.0.5",
+    "chai": "^4.0.2",
     "css-loader": "^0.23.0",
     "electron": "^1.6.8",
     "electron-builder": "^18.6.2",
     "electron-packager": "^8.7.1",
     "electron-winstaller": "^2.6.2",
+    "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-mocha": "^4.10.1",
     "eslint-plugin-react": "^7.0.1",
     "express": "^4.15.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "html-loader": "^0.4.0",
     "html-webpack-plugin": "^2.28.0",
+    "jsdom": "^9.12.0",
     "json-loader": "^0.5.4",
+    "mocha": "^3.4.2",
     "node-sass": "^3.10.1",
     "npm-run-all": "4.0.2",
+    "nyc": "^11.0.2",
     "postcss": "^5.0.13",
     "postcss-loader": "^0.8.0",
+    "react-addons-test-utils": "^15.6.0",
     "sass-loader": "^4.0.2",
+    "sinon": "^2.3.4",
     "source-map-loader": "^0.2.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-shell-plugin": "^0.5.0",
     "webpack-target-electron-renderer": "^0.3.0"
+  },
+  "nyc": {
+    "extension": [
+      ".jsx"
+    ],
+    "exclude": [
+      "src/actions/*.js",
+      "src/utils/chroma.js",
+      "test/**"
+    ]
   },
   "repository": {
     "type": "git",

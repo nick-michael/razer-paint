@@ -6,15 +6,6 @@ import { BRUSH, PICKER, ERASER, FILL } from '../constants/tools';
 
 import { saveFile, openFile } from '../utils/fileStytem';
 
-const getEditClassName = (isSelected, isEditing) => {
-    if (!isSelected) {
-        return '';
-    } else if (isEditing) {
-        return 'toolbar-item-icon__selected';
-    }
-    return 'toolbar-item-icon__available';
-};
-
 const Toolbar = props => (
     <div>
         <div className={`toolbar ${props.isPlaying ? 'toolbar-disabled-playing' : ''}`} style={{ marginBottom: '4px' }}>
@@ -62,7 +53,7 @@ const Toolbar = props => (
                     <icons.Copy />
                 </div>
             </div>
-            <div className="toolbar-item toolbar-item-can-disable" onClick={() => typeof props.selectedFrame === 'number' && props.clipboard && props.paste()}>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={() => props.clipboard && props.paste()}>
                 <div className="tooltip">Paste</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${props.clipboard ? 'available' : ''}`}>
                     <icons.Paste />
@@ -71,24 +62,24 @@ const Toolbar = props => (
         </div>
         <div className={`toolbar ${props.isPlaying ? 'toolbar-disabled-playing' : ''}`}>
             <div className="toolbar-item toolbar-item-can-disable" onClick={props.capture}>
-                <div className="tooltip">Caputre Frame</div>
+                <div className="tooltip">Capture Frame</div>
                 <div className="toolbar-item-icon toolbar-item-icon__available">
                     <icons.Capture />
                 </div>
             </div>
-            <div className="toolbar-item" onClick={typeof props.selectedFrame === 'number' && props.toggleEditing}>
+            <div className="toolbar-item" onClick={props.toggleEditing}>
                 <div className="tooltip">Edit Frame</div>
-                <div className={`toolbar-item-icon ${getEditClassName(typeof props.selectedFrame === 'number', props.isEditing)}`}>
+                <div className={`toolbar-item-icon toolbar-item-icon__${props.isEditing ? 'selected' : 'available'}`}>
                     <icons.Edit />
                 </div>
             </div>
-            <div className="toolbar-item toolbar-item-can-disable" onClick={typeof props.selectedFrame === 'number' && props.insertFrame}>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={() => typeof props.selectedFrame === 'number' && props.insertFrame()}>
                 <div className="tooltip">Insert Frame</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
                     <icons.Insert />
                 </div>
             </div>
-            <div className="toolbar-item toolbar-item-can-disable" onClick={typeof props.selectedFrame === 'number' && props.deleteFrame}>
+            <div className="toolbar-item toolbar-item-can-disable" onClick={() => typeof props.selectedFrame === 'number' && props.deleteFrame()}>
                 <div className="tooltip">Delete Frame</div>
                 <div className={`toolbar-item-icon toolbar-item-icon__${typeof props.selectedFrame === 'number' ? 'available' : ''}`}>
                     <icons.Trashcan />
@@ -108,7 +99,7 @@ const Toolbar = props => (
                 </div>
             </div>
             <div className="toolbar-spacer" />
-            <div className="toolbar-item" onClick={props.isPlaying ? props.animate.length > 0 && props.pauseAnimation : props.animate.length > 0 && props.playAnimation}>
+            <div className="toolbar-item" onClick={() => { props.isPlaying ? props.pauseAnimation() : props.animate.length > 0 && props.playAnimation(); }}>
                 <div className="tooltip">{ props.isPlaying ? 'Pause' : 'Play' }</div>
                 <div className={`toolbar-item-icon ${props.animate.length > 0 ? 'toolbar-item-icon__available' : ''}`}>
                     {props.isPlaying ? <icons.Pause /> : <icons.Play />}
@@ -159,7 +150,11 @@ Toolbar.propTypes = {
     isEditing: PropTypes.bool.isRequired,
     insertFrame: PropTypes.func.isRequired,
     deleteFrame: PropTypes.func.isRequired,
-    saveState: PropTypes.func.isRequired,
+    saveState: PropTypes.shape({
+        frame: PropTypes.objectOf(PropTypes.string),
+        animate: PropTypes.arrayOf(PropTypes.object),
+        fps: PropTypes.number,
+    }).isRequired,
     loadAnimation: PropTypes.func.isRequired,
     playAnimation: PropTypes.func.isRequired,
     pauseAnimation: PropTypes.func.isRequired,
