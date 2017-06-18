@@ -51,14 +51,14 @@ describe('Canvas Container', () => {
                 const canvasComponent = createCanvasComponent();
                 canvasComponent.props().handlePixelMouseDown({ button: 0 }, '0');
 
-                sinon.assert.calledWith(paintFrameSpy, { '0': 'ffffff' });
+                sinon.assert.calledWith(paintFrameSpy, { 0: 'ffffff' });
             });
 
             it('should paint a pixel black on right click if brush is selected', () => {
                 const canvasComponent = createCanvasComponent();
                 canvasComponent.props().handlePixelMouseDown({ button: 2 }, '0');
 
-                sinon.assert.calledWith(paintFrameSpy, { '0': '000000' });
+                sinon.assert.calledWith(paintFrameSpy, { 0: '000000' });
             });
 
             it('should paint a pixel black on left click if eraser is selected', () => {
@@ -66,7 +66,7 @@ describe('Canvas Container', () => {
                 const canvasComponent = createCanvasComponent();
                 canvasComponent.props().handlePixelMouseDown({ button: 0 }, '0');
 
-                sinon.assert.calledWith(paintFrameSpy, { '0': '000000' });
+                sinon.assert.calledWith(paintFrameSpy, { 0: '000000' });
             });
 
             it('should paint a pixel black on right click if eraser is selected', () => {
@@ -74,7 +74,7 @@ describe('Canvas Container', () => {
                 const canvasComponent = createCanvasComponent();
                 canvasComponent.props().handlePixelMouseDown({ button: 0 }, '0');
 
-                sinon.assert.calledWith(paintFrameSpy, { '0': '000000' });
+                sinon.assert.calledWith(paintFrameSpy, { 0: '000000' });
             });
 
             it('should set the state color to selected pixel black on left click if picker is selected', () => {
@@ -91,7 +91,7 @@ describe('Canvas Container', () => {
                 const canvasComponent = createCanvasComponent();
                 canvasComponent.props().handlePixelMouseDown({ button: 2 }, '0');
 
-                sinon.assert.calledWith(paintFrameSpy, { '0': '000000' });
+                sinon.assert.calledWith(paintFrameSpy, { 0: '000000' });
             });
 
             it('should not paint a pixel on right click if fill is selected', () => {
@@ -180,7 +180,7 @@ describe('Canvas Container', () => {
             const canvasComponent = createCanvasComponent();
             canvasComponent.props().handleMouseOver({ button: 0 }, '0');
 
-            sinon.assert.calledWith(paintFrameSpy, { '0': 'ffffff' });
+            sinon.assert.calledWith(paintFrameSpy, { 0: 'ffffff' });
         });
 
         it('should not paint pixel if not isPainting', () => {

@@ -1,6 +1,7 @@
-const { remote } = window.require('electron'); // eslint-disable-line import/no-extraneous-dependencies
-const { platform, setPlatform } = window.require('os');
 import * as appUtils from '../../../src/utils/app';
+
+const { remote } = window.require('electron'); // eslint-disable-line import/no-extraneous-dependencies
+const { setPlatform } = window.require('os');
 
 describe('App Utils', () => {
     describe('getFloat', () => {

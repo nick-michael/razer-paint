@@ -1,11 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Toolbar, {setCount} from '../../../src/containers/Toolbar';
-import * as canvasActions from '../../../src/actions/canvasActions';
+import Toolbar, { setCount } from '../../../src/containers/Toolbar';
 import * as frameActions from '../../../src/actions/frameActions';
 import fakeStore from '../reduxUtils';
-import { BRUSH, PICKER, ERASER, FILL } from '../../../src/constants/tools';
+import { BRUSH } from '../../../src/constants/tools';
 
 describe('Toolbar Container', () => {
     const sandbox = sinon.sandbox.create();
@@ -30,13 +29,13 @@ describe('Toolbar Container', () => {
                 frame: {},
                 frames: [{}],
                 redoFrames: [{}],
-                animate: [{ '0': '000001' }, { '0': '000002' }, { '0': '000003'}],
+                animate: [{ 0: '000001' }, { 0: '000002' }, { 0: '000003' }],
                 selectedFrame: 0,
                 isEditing: true,
                 fps: 30,
                 isPlaying: false,
                 isReversed: false,
-                clipboard: {'0': 'clpbrd'},
+                clipboard: { 0: 'clpbrd' },
             },
             canvas: {
                 tool: BRUSH,
@@ -67,11 +66,11 @@ describe('Toolbar Container', () => {
 
             clock.tick(500);
             sinon.assert.calledOnce(paintFrameSpy);
-            sinon.assert.calledWith(paintFrameSpy, { '0': '000001' });
+            sinon.assert.calledWith(paintFrameSpy, { 0: '000001' });
 
             clock.tick(500);
             sinon.assert.calledTwice(paintFrameSpy);
-            sinon.assert.calledWith(paintFrameSpy, { '0': '000002' });
+            sinon.assert.calledWith(paintFrameSpy, { 0: '000002' });
         });
 
         it('should deselect frame and play animation in reverse', () => {
@@ -84,11 +83,11 @@ describe('Toolbar Container', () => {
 
             clock.tick(500);
             sinon.assert.calledOnce(paintFrameSpy);
-            sinon.assert.calledWith(paintFrameSpy, { '0': '000001' });
+            sinon.assert.calledWith(paintFrameSpy, { 0: '000001' });
 
             clock.tick(500);
             sinon.assert.calledTwice(paintFrameSpy);
-            sinon.assert.calledWith(paintFrameSpy, { '0': '000003' });
+            sinon.assert.calledWith(paintFrameSpy, { 0: '000003' });
         });
 
         it('should play animation relative to fps', () => {
@@ -169,26 +168,26 @@ describe('Toolbar Container', () => {
             toolbarComponent.props().paste();
 
             sinon.assert.calledOnce(keyframeSpy);
-            sinon.assert.calledWith(paintFrameSpy, { '0': 'clpbrd' });
+            sinon.assert.calledWith(paintFrameSpy, { 0: 'clpbrd' });
         });
     });
 
     it('should set canUndo to true if frames contains more than one frame', () => {
-        state.frames.frames = [{ '0': '000001' }, { '0': '000002' }, { '0': '000003'}];
+        state.frames.frames = [{ 0: '000001' }, { 0: '000002' }, { 0: '000003' }];
         const toolbarComponent = createToolbarComponent();
 
         expect(toolbarComponent.props().canUndo).to.be.true;
     });
 
     it('should set canUndo to false if frames contains one (or less) frame', () => {
-        state.frames.frames = [{ '0': '000001' }];
+        state.frames.frames = [{ 0: '000001' }];
         const toolbarComponent = createToolbarComponent();
 
         expect(toolbarComponent.props().canUndo).to.be.false;
     });
 
     it('should set canRedo to true if redoFrames contains at least one frame', () => {
-        state.frames.redoFrames = [{ '0': '000001' }];
+        state.frames.redoFrames = [{ 0: '000001' }];
         const toolbarComponent = createToolbarComponent();
 
         expect(toolbarComponent.props().canRedo).to.be.true;

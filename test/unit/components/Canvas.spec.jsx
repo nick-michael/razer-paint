@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 
 import Canvas from '../../../src/components/Canvas';
 import Pixel from '../../../src/components/Pixel';
-import Toolbar from '../../../src/components/Toolbar';
 import ChromaSDK from '../../../src/utils/chroma';
 import * as frameUtils from '../../../src/utils/frame';
 
@@ -25,13 +24,13 @@ describe('Canvas Component', () => {
 
         canvas = shallow(
             <Canvas
-                frame={{ '0': '000000' }}
-                handlePixelMouseUp={sandbox.stub()}
-                handlePixelMouseDown={sandbox.stub()}
-                handleMouseOver={sandbox.stub()}
-                handleMouseUp={sandbox.stub()}
-                setIsPainting={sandbox.stub()}
-            />
+              frame={{ 0: '000000' }}
+              handlePixelMouseUp={sandbox.stub()}
+              handlePixelMouseDown={sandbox.stub()}
+              handleMouseOver={sandbox.stub()}
+              handleMouseUp={sandbox.stub()}
+              setIsPainting={sandbox.stub()}
+            />,
         );
     });
 
@@ -64,7 +63,8 @@ describe('Canvas Component', () => {
     });
 
     it('should render 132 pixels', () => {
-        expect(canvas.find(Pixel).length).to.equal(frameUtils.CANVAS_HEIGHT * frameUtils.CANVAS_WIDTH);
+        const totalPixels = frameUtils.CANVAS_HEIGHT * frameUtils.CANVAS_WIDTH;
+        expect(canvas.find(Pixel).length).to.equal(totalPixels);
     });
 
     it('should set pinting to true on mouse down', () => {

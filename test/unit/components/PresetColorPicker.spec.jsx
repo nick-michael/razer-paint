@@ -9,25 +9,25 @@ describe('PresetColorPicker Component', () => {
     beforeEach(() => {
         presetColorPicker = shallow(
             <PresetColorPicker
-                brushColor="ffffff"
-                presetColors={['cccccc', '000000', 'ffffff']}
-                setColor={sinon.stub()}
-            />
+              brushColor="ffffff"
+              presetColors={['cccccc', '000000', 'ffffff']}
+              setColor={sinon.stub()}
+            />,
         );
     });
 
     it('should render color spots based on the preset colors array', () => {
         const colorSpots = presetColorPicker.find('.color-spot').nodes;
-        for (var index = 0; index < colorSpots.length; index++) {
+        for (let index = 0; index < colorSpots.length; index += 1) {
             expect(colorSpots[index].props.style.background).to.equal(`#${presetColorPicker.instance().props.presetColors[index]}`);
         }
     });
 
-    it('should select color spot that matches brushColor', () => {        
+    it('should select color spot that matches brushColor', () => {
         expect(presetColorPicker.find('.color-spot').nodes[2].props.className.includes('__selected')).to.be.true;
     });
 
-    it('should not select color spot that doesn\'t match brushColor', () => {        
+    it('should not select color spot that doesn\'t match brushColor', () => {
         expect(presetColorPicker.find('.color-spot').nodes[1].props.className.includes('__selected')).to.be.false;
     });
 

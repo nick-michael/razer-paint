@@ -99,7 +99,7 @@ const Toolbar = props => (
                 </div>
             </div>
             <div className="toolbar-spacer" />
-            <div className="toolbar-item" onClick={() => props.isPlaying ? props.pauseAnimation() : props.animate.length > 0 && props.playAnimation()}>
+            <div className="toolbar-item" onClick={() => { props.isPlaying ? props.pauseAnimation() : props.animate.length > 0 && props.playAnimation(); }}>
                 <div className="tooltip">{ props.isPlaying ? 'Pause' : 'Play' }</div>
                 <div className={`toolbar-item-icon ${props.animate.length > 0 ? 'toolbar-item-icon__available' : ''}`}>
                     {props.isPlaying ? <icons.Pause /> : <icons.Play />}
@@ -150,7 +150,11 @@ Toolbar.propTypes = {
     isEditing: PropTypes.bool.isRequired,
     insertFrame: PropTypes.func.isRequired,
     deleteFrame: PropTypes.func.isRequired,
-    saveState: PropTypes.object.isRequired,
+    saveState: PropTypes.shape({
+        frame: PropTypes.objectOf(PropTypes.string),
+        animate: PropTypes.arrayOf(PropTypes.object),
+        fps: PropTypes.number,
+    }).isRequired,
     loadAnimation: PropTypes.func.isRequired,
     playAnimation: PropTypes.func.isRequired,
     pauseAnimation: PropTypes.func.isRequired,

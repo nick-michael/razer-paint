@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ChromePicker } from 'react-color';
 
 import Toolbar from '../../../src/components/Toolbar';
 import * as tools from '../../../src/constants/tools';
@@ -19,33 +18,33 @@ describe('Toolbar Component', () => {
 
         toolbar = shallow(
             <Toolbar
-                tool={tools.BRUSH}
-                canUndo={false}
-                canRedo={false}
-                isPlaying={false}
-                selectedFrame={0}
-                fps={30}
-                animate={[{}, {}]}
-                clipboard={{ '0': 'clpbrd' }}
-                copy={sandbox.stub()}
-                paste={sandbox.stub()}
-                undo={sandbox.stub()}
-                redo={sandbox.stub()}
-                capture={sandbox.stub()}
-                selectTool={sandbox.stub()}
-                setFps={sandbox.stub()}
-                updateFps={sandbox.stub()}
-                toggleEditing={sandbox.stub()}
-                isEditing={false}
-                insertFrame={sandbox.stub()}
-                deleteFrame={sandbox.stub()}
-                saveState={{ 'state': 'value' }}
-                loadAnimation={sandbox.stub()}
-                playAnimation={sandbox.stub()}
-                pauseAnimation={sandbox.stub()}
-                toggleReverse={sandbox.stub()}
-                isReversed={false}
-            />
+              tool={tools.BRUSH}
+              canUndo={false}
+              canRedo={false}
+              isPlaying={false}
+              selectedFrame={0}
+              fps={30}
+              animate={[{}, {}]}
+              clipboard={{ 0: 'clpbrd' }}
+              copy={sandbox.stub()}
+              paste={sandbox.stub()}
+              undo={sandbox.stub()}
+              redo={sandbox.stub()}
+              capture={sandbox.stub()}
+              selectTool={sandbox.stub()}
+              setFps={sandbox.stub()}
+              updateFps={sandbox.stub()}
+              toggleEditing={sandbox.stub()}
+              isEditing={false}
+              insertFrame={sandbox.stub()}
+              deleteFrame={sandbox.stub()}
+              saveState={{ state: 'value' }}
+              loadAnimation={sandbox.stub()}
+              playAnimation={sandbox.stub()}
+              pauseAnimation={sandbox.stub()}
+              toggleReverse={sandbox.stub()}
+              isReversed={false}
+            />,
         );
     });
 
@@ -200,7 +199,7 @@ describe('Toolbar Component', () => {
             expect(undo.find(icons.Undo).length).to.equal(1);
         });
 
-        it('should have `toolbar-item-can-disable` class', () => {        
+        it('should have `toolbar-item-can-disable` class', () => {
             expect(undo.hasClass('toolbar-item-can-disable')).to.be.true;
         });
 
@@ -243,7 +242,7 @@ describe('Toolbar Component', () => {
             expect(redo.find(icons.Redo).length).to.equal(1);
         });
 
-        it('should have `toolbar-item-can-disable` class', () => {        
+        it('should have `toolbar-item-can-disable` class', () => {
             expect(redo.hasClass('toolbar-item-can-disable')).to.be.true;
         });
 
@@ -286,7 +285,7 @@ describe('Toolbar Component', () => {
             expect(copy.find(icons.Copy).length).to.equal(1);
         });
 
-        it('should have `toolbar-item-can-disable` class', () => {        
+        it('should have `toolbar-item-can-disable` class', () => {
             expect(copy.hasClass('toolbar-item-can-disable')).to.be.true;
         });
 
@@ -316,7 +315,7 @@ describe('Toolbar Component', () => {
             expect(paste.find(icons.Paste).length).to.equal(1);
         });
 
-        it('should have `toolbar-item-can-disable` class', () => {        
+        it('should have `toolbar-item-can-disable` class', () => {
             expect(paste.hasClass('toolbar-item-can-disable')).to.be.true;
         });
 
@@ -359,7 +358,7 @@ describe('Toolbar Component', () => {
             expect(capture.find(icons.Capture).length).to.equal(1);
         });
 
-        it('should have `toolbar-item-can-disable` class', () => {        
+        it('should have `toolbar-item-can-disable` class', () => {
             expect(capture.hasClass('toolbar-item-can-disable')).to.be.true;
         });
 
@@ -389,7 +388,7 @@ describe('Toolbar Component', () => {
             expect(edit.find(icons.Edit).length).to.equal(1);
         });
 
-        it('should not have `toolbar-item-can-disable` class', () => {        
+        it('should not have `toolbar-item-can-disable` class', () => {
             expect(edit.hasClass('toolbar-item-can-disable')).to.be.false;
         });
 
@@ -425,7 +424,7 @@ describe('Toolbar Component', () => {
             expect(insert.find(icons.Insert).length).to.equal(1);
         });
 
-        it('should have `toolbar-item-can-disable` class', () => {        
+        it('should have `toolbar-item-can-disable` class', () => {
             expect(insert.hasClass('toolbar-item-can-disable')).to.be.true;
         });
 
@@ -468,7 +467,7 @@ describe('Toolbar Component', () => {
             expect(deleteFrame.find(icons.Trashcan).length).to.equal(1);
         });
 
-        it('should have `toolbar-item-can-disable` class', () => {        
+        it('should have `toolbar-item-can-disable` class', () => {
             expect(deleteFrame.hasClass('toolbar-item-can-disable')).to.be.true;
         });
 
@@ -511,7 +510,7 @@ describe('Toolbar Component', () => {
             expect(save.find(icons.Save).length).to.equal(1);
         });
 
-        it('should not have `toolbar-item-can-disable` class', () => {        
+        it('should not have `toolbar-item-can-disable` class', () => {
             expect(save.hasClass('toolbar-item-can-disable')).to.be.false;
         });
 
@@ -523,7 +522,7 @@ describe('Toolbar Component', () => {
 
         it('should save on click', () => {
             save.prop('onClick')();
-            sinon.assert.calledWith(saveFileStub, { 'state': 'value' });
+            sinon.assert.calledWith(saveFileStub, { state: 'value' });
         });
 
         it('should have `__available` modifier', () => {
@@ -541,7 +540,7 @@ describe('Toolbar Component', () => {
             expect(open.find(icons.Open).length).to.equal(1);
         });
 
-        it('should not have `toolbar-item-can-disable` class', () => {        
+        it('should not have `toolbar-item-can-disable` class', () => {
             expect(open.hasClass('toolbar-item-can-disable')).to.be.false;
         });
 
@@ -572,7 +571,7 @@ describe('Toolbar Component', () => {
                 expect(play.find(icons.Play).length).to.equal(1);
             });
 
-            it('should not have `toolbar-item-can-disable` class', () => {        
+            it('should not have `toolbar-item-can-disable` class', () => {
                 expect(play.hasClass('toolbar-item-can-disable')).to.be.false;
             });
 
@@ -604,7 +603,7 @@ describe('Toolbar Component', () => {
                 expect(play.find('.toolbar-item-icon__available').length).to.equal(0);
             });
         });
-        
+
         describe('Pause (isPlaying=true)', () => {
             let pause;
             beforeEach(() => {
@@ -616,7 +615,7 @@ describe('Toolbar Component', () => {
                 expect(pause.find(icons.Pause).length).to.equal(1);
             });
 
-            it('should not have `toolbar-item-can-disable` class', () => {        
+            it('should not have `toolbar-item-can-disable` class', () => {
                 expect(pause.hasClass('toolbar-item-can-disable')).to.be.false;
             });
 
@@ -647,7 +646,7 @@ describe('Toolbar Component', () => {
             expect(reverse.find(icons.Rewind).length).to.equal(1);
         });
 
-        it('should not have `toolbar-item-can-disable` class', () => {        
+        it('should not have `toolbar-item-can-disable` class', () => {
             expect(reverse.hasClass('toolbar-item-can-disable')).to.be.false;
         });
 
@@ -688,7 +687,7 @@ describe('Toolbar Component', () => {
 
         it('should change the current fps when fps prop changes', () => {
             toolbar.setProps({ fps: 10 });
-            const slider = toolbar.find('.toolbar-slider').at(0);
+            slider = toolbar.find('.toolbar-slider').at(0);
             expect(slider.text()).to.equal('fps: 10');
         });
 

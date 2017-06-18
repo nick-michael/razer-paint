@@ -15,31 +15,31 @@ describe('App Component', () => {
     let eventListenerStub;
 
     beforeEach(() => {
-        checkForUpdateStub = sandbox.stub(updateUtils, 'checkForUpdates').returns(Promise.resolve({ version }));
+        checkForUpdateStub = sandbox.stub(updateUtils, 'default').returns(Promise.resolve({ version }));
 
         mountApp = () => {
             app = shallow(
                 <App
-                    brushColor="ffffff"
-                    setColor={() => {}}
-                    clipboard={{ '0': 'clipboard' }}
-                    animate={[]}
-                    presetColors={['', '']}
-                    selectAnimationFrame={() => {}}
-                    setLongHexColor={sandbox.stub()}
-                    paintFrame={sandbox.stub()}
-                    keyframe={sandbox.stub()}
-                    toggleIsPlaying={sandbox.stub()}
-                    nextFrame={sandbox.stub()}
-                    previousFrame={sandbox.stub()}
-                    undo={sandbox.stub()}
-                    redo={sandbox.stub()}
-                    copy={sandbox.stub()}
-                    selectedFrame={0}
-                    isPlaying={false}
-                />
+                  brushColor="ffffff"
+                  setColor={() => {}}
+                  clipboard={{ 0: 'clipboard' }}
+                  animate={[]}
+                  presetColors={['', '']}
+                  selectAnimationFrame={() => {}}
+                  setLongHexColor={sandbox.stub()}
+                  paintFrame={sandbox.stub()}
+                  keyframe={sandbox.stub()}
+                  toggleIsPlaying={sandbox.stub()}
+                  nextFrame={sandbox.stub()}
+                  previousFrame={sandbox.stub()}
+                  undo={sandbox.stub()}
+                  redo={sandbox.stub()}
+                  copy={sandbox.stub()}
+                  selectedFrame={0}
+                  isPlaying={false}
+                />,
             );
-        }
+        };
 
         eventListenerStub = sandbox.stub(document, 'addEventListener');
     });
@@ -59,7 +59,7 @@ describe('App Component', () => {
     it('should set showUpdateOverlay if update is available', () => {
         checkForUpdateStub.returns(Promise.resolve({ version: '9.9.9' }));
         mountApp();
-        return Promise.resolve().then (() => {
+        return Promise.resolve().then(() => {
             expect(app.instance().state.showUpdateOverlay).to.be.true;
             sinon.assert.calledOnce(checkForUpdateStub);
         });
@@ -71,7 +71,6 @@ describe('App Component', () => {
     });
 
     describe('handleKeyPress', () => {
-        let keyCodeActionMapStub;
         let keyCodeActionFunctionStub;
 
         beforeEach(() => {
@@ -91,7 +90,7 @@ describe('App Component', () => {
             sinon.assert.calledOnce(keyCodeActionFunctionStub);
         });
 
-                
+
         it('should correctly add shift, crtl and alt codes', () => {
             app.instance().handleKeyPress({ keyCode: keyCodes.ARROW_LEFT });
             app.instance().handleKeyPress({
@@ -113,7 +112,7 @@ describe('App Component', () => {
         });
     });
 
-    describe('paste', () => {        
+    describe('paste', () => {
         it('should dispatch a keyframe', () => {
             app.instance().paste();
 
@@ -123,11 +122,11 @@ describe('App Component', () => {
         it('should paste the clipboard into paintFrame', () => {
             app.instance().paste();
 
-            sinon.assert.calledWith(app.instance().props.paintFrame, { '0': 'clipboard' });
+            sinon.assert.calledWith(app.instance().props.paintFrame, { 0: 'clipboard' });
         });
     });
 
-    describe('keyCodeActionMap', () => {        
+    describe('keyCodeActionMap', () => {
         it('should call toggleIsPlaying on spacebar press', () => {
             mountApp();
             app.instance().keyCodeActionMap()[keyCodes.SPACEBAR] &&
@@ -243,7 +242,7 @@ describe('App Component', () => {
         });
     });
 
-    describe('closeUpdateOverlay', () => {        
+    describe('closeUpdateOverlay', () => {
         it('should set showUpdateOverlay in state to false', () => {
             mountApp();
             app.instance().closeUpdateOverlay();

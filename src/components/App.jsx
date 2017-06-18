@@ -9,7 +9,7 @@ import PresetColorPicker from './PresetColorPicker';
 import * as icons from '../icons/icons';
 import { version } from '../../package.json';
 import * as keyCodes from '../constants/keyCodes';
-import { checkForUpdates } from '../utils/update';
+import checkForUpdates from '../utils/update';
 import { getFloat, handleClose, handleMinimize } from '../utils/app';
 
 export default class App extends React.Component {
