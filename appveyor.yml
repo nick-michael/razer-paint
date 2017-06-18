@@ -1,15 +1,17 @@
 version: 1.0.{build}
 install:
-  - ps: Install-Product node 6
+  - ps: Install-Product node 6.10
+  - npm install -g npm@latest
   - npm install
 pull_requests:
   do_not_increment_build_number: true
-skip_tags: false
 environment:
   GH_TOKEN:
     secure: D04x8djK8cRtoR47RIi3HC3FArLnefMpk368HefDJoVwEvYUilileOceRA6gkBZ7
+skip_non_tags: true
+image: Visual Studio 2013
+test_script:
+- ps: npm test
 build_script:
-- ps: >-
-    npm run build:webapp:prod
-
-    npm run build:win
+  - ps: npm run build:webapp:prod
+  - ps: npm run build:win
