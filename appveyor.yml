@@ -10,8 +10,8 @@ environment:
     secure: D04x8djK8cRtoR47RIi3HC3FArLnefMpk368HefDJoVwEvYUilileOceRA6gkBZ7
 skip_non_tags: true
 image: Visual Studio 2013
-test_script:
-- ps: npm test
+before_build:
+- ps: npm run test
 build_script:
   - ps: npm run build:webapp:prod
   - ps: npm run build:win
