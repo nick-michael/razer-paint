@@ -13,6 +13,17 @@ class Animate extends React.Component {
         this.renderFrames();
     }
 
+    createFrames() {
+        return this.props.frames.map((frame, index) => (
+            <div className={`frame${this.props.selectedFrame === index ? ' frame__selected' : ''}`} onClick={() => !this.props.isPlaying && this.props.selectAnimationFrame(index)}>
+                <canvas ref={(c) => { this[`animate-frame-${index}`] = c; }} id={`animate-frame-${index}`} width={CANVAS_WIDTH * PIXEL_SIZE} height={CANVAS_HEIGHT * PIXEL_SIZE} />
+                <div style={{ textAlign: 'center', color: '#FFF' }}>
+                    {index + 1}
+                </div>
+            </div>
+            ));
+    }
+
     renderFrames() {
         for (let frameCount = 0; frameCount < this.props.frames.length; frameCount += 1) {
             const drawingCanvas = this[`animate-frame-${frameCount}`];
@@ -26,17 +37,6 @@ class Animate extends React.Component {
                 }
             }
         }
-    }
-
-    createFrames() {
-        return this.props.frames.map((frame, index) => (
-            <div className={`frame${this.props.selectedFrame === index ? ' frame__selected' : ''}`} onClick={() => !this.props.isPlaying && this.props.selectAnimationFrame(index)}>
-                <canvas ref={(c) => { this[`animate-frame-${index}`] = c; }} id={`animate-frame-${index}`} width={CANVAS_WIDTH * PIXEL_SIZE} height={CANVAS_HEIGHT * PIXEL_SIZE} />
-                <div style={{ textAlign: 'center', color: '#FFF' }}>
-                    {index + 1}
-                </div>
-            </div>
-            ));
     }
 
     render() {

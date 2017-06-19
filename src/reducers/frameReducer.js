@@ -18,27 +18,51 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case types.UNDO:
-            return {
-                ...state,
-                frame: state.frames.slice(-2)[0],
-                frames: state.frames.slice(0, state.frames.length - 1),
-                redoFrames: state.redoFrames.concat(state.frame),
-            };
+        case types.UNDO: {
+            if (state.frames.length > 1) {
+                const newFrame = state.frames.slice(-2)[0];
+                const newState = {
+                    frame: newFrame,
+                    frames: state.frames.slice(0, state.frames.length - 1),
+                    redoFrames: state.redoFrames.concat(state.frame),
+                };
+
+                if (state.isEditing && typeof state.selectedFrame === 'number') {
+                    const newAnimation = [...state.animate];
+                    newAnimation[state.selectedFrame] = newFrame;
+                    newState.animate = newAnimation;
+                }
+                return { ...state, ...newState };
+            }
+            return state;
+        }
         case types.REDO:
-            return {
-                ...state,
-                frame: state.redoFrames.slice(-1)[0],
-                frames: state.frames.concat(state.redoFrames.slice(-1)[0]),
-                redoFrames: state.redoFrames.slice(0, -1),
-            };
+            if (state.redoFrames.length > 0) {
+                const newFrame = state.redoFrames.slice(-1)[0];
+                const newState = {
+                    frame: newFrame,
+                    frames: state.frames.concat(state.redoFrames.slice(-1)[0]),
+                    redoFrames: state.redoFrames.slice(0, -1),
+                };
+
+                if (state.isEditing && typeof state.selectedFrame === 'number') {
+                    const newAnimation = [...state.animate];
+                    newAnimation[state.selectedFrame] = newFrame;
+                    newState.animate = newAnimation;
+                }
+
+                return { ...state, ...newState };
+            }
+            return state;
         case types.PAINT_FRAME: {
-            if (state.isEditing && !state.isPlaying) {
+            const newState = { frame: action.payload, redoFrames: [] };
+            if (state.isEditing && typeof state.selectedFrame === 'number' && !state.isPlaying) {
                 const newAnimation = [...state.animate];
                 newAnimation[state.selectedFrame] = action.payload;
-                return { ...state, frame: action.payload, redoFrames: [], animate: newAnimation };
+                newState.animate = newAnimation;
             }
-            return { ...state, frame: action.payload, redoFrames: [] };
+
+            return { ...state, ...newState };
         }
         case types.KEYFRAME:
             return { ...state, frames: state.frames.slice(MAX_UNDO).concat(state.frame) };
@@ -60,7 +84,9 @@ export default (state = defaultState, action) => {
         }
         case types.DELETE_FRAME: {
             const withoutFrame = state.animate.filter((e, i) => (i !== state.selectedFrame));
-            const newAnimation = withoutFrame.length ? state.animate.filter((e, i) => (i !== state.selectedFrame)) : [frame];
+            const newAnimation = withoutFrame.length
+                ? state.animate.filter((e, i) => (i !== state.selectedFrame))
+                : [frame];
 
             const selectedFrame = state.selectedFrame >= state.animate.length - 1
                     ? Math.max(state.selectedFrame - 1, 0)
@@ -99,6 +125,11 @@ export default (state = defaultState, action) => {
                 ...state,
                 isPlaying: action.payload,
             };
+        case types.TOGGLE_IS_PLAYING:
+            return {
+                ...state,
+                isPlaying: !state.isPlaying,
+            };
         case types.TOGGLE_REVERSE:
             return {
                 ...state,
@@ -113,6 +144,16 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 clipboard: state.frame,
+            };
+        case types.NEXT_FRAME:
+            return {
+                ...state,
+                selectedFrame: Math.min(state.selectedFrame + 1, state.animate.length - 1),
+            };
+        case types.PREVIOUS_FRAME:
+            return {
+                ...state,
+                selectedFrame: Math.max(state.selectedFrame - 1, 0),
             };
         default:
             return state;

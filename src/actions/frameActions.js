@@ -52,6 +52,10 @@ export const setIsPlaying = flag => ({
     payload: flag,
 });
 
+export const toggleIsPlaying = () => ({
+    type: types.TOGGLE_IS_PLAYING,
+});
+
 export const toggleReverse = () => ({
     type: types.TOGGLE_REVERSE,
 });
@@ -63,4 +67,12 @@ export const setFps = fps => ({
 
 export const copy = () => ({
     type: types.COPY,
+});
+
+export const nextFrame = () => ({
+    type: types.NEXT_FRAME,
+});
+
+export const previousFrame = () => ({
+    type: types.PREVIOUS_FRAME,
 });
