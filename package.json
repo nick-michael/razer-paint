@@ -16,7 +16,7 @@
     "build:win": "node ./build/buildscript.js",
     "lint": "eslint **/ --ext .jsx,.js --ignore-path .gitignore",
     "lint:fix": "npm run lint -- --fix",
-    "test": "cross-env NODE_ENV=test NODE_PATH=./src nyc --require babel-core/register node_modules/.bin/_mocha --require test/unit/setup.js -- 'test/unit/**/*.js*'",
+    "test": "cross-env NODE_ENV=test NODE_PATH=./src nyc --require babel-core/register node_modules/.bin/_mocha --require test/unit/setup.js -- \"test/unit/**/*.js*\"",
     "coverage-report": "nyc report --reporter=lcov"
   },
   "dependencies": {
