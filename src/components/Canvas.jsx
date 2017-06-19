@@ -8,7 +8,7 @@ import ChromaSDK from '../utils/chroma';
 
 export default class Canvas extends React.Component {
     componentWillMount() {
-        window.addEventListener('mouseup', this.props.handleMouseUp);
+        window.addEventListener('mouseup', () => this.props.handleMouseUp());
         ChromaSDK.init(54235);
     }
 
