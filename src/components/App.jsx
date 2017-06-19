@@ -110,7 +110,7 @@ export default class App extends React.Component {
 App.propTypes = {
     brushColor: PropTypes.string.isRequired,
     setColor: PropTypes.func.isRequired,
-    clipboard: PropTypes.objectOf(PropTypes.string).isRequired,
+    clipboard: PropTypes.objectOf(PropTypes.string),
     animate: PropTypes.arrayOf(PropTypes.object).isRequired,
     presetColors: PropTypes.arrayOf(PropTypes.string).isRequired,
     selectAnimationFrame: PropTypes.func.isRequired,

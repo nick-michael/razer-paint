@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const PresetColorPicker = (props) => {
     const renderColors = () => props.presetColors.map(color => (
-        <div className="color-spot-container">
+        <div key={color} className="color-spot-container">
             <div className={`color-spot ${color === props.brushColor ? 'color-spot__selected' : ''}`} style={{ background: `#${color}` }} onClick={() => props.setColor(color)} />
         </div>
             ));
