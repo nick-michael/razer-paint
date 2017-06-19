@@ -42,6 +42,8 @@ describe('Canvas Component', () => {
         canvas.instance().componentWillMount();
 
         sinon.assert.calledWith(eventListenerStub, 'mouseup', sinon.match.func);
+        eventListenerStub.callsArg(0).args[0][1]();
+        sinon.assert.calledOnce(canvas.instance().props.handleMouseUp);
     });
 
     it('should initialize the chroma sdk on mount', () => {
