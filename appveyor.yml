@@ -1,0 +1,21 @@
+version: 1.0.{build}
+install:
+  - ps: Install-Product node 6.10
+  - npm install -g npm@latest
+  - npm install
+pull_requests:
+  do_not_increment_build_number: true
+environment:
+  GH_TOKEN:
+    secure: D04x8djK8cRtoR47RIi3HC3FArLnefMpk368HefDJoVwEvYUilileOceRA6gkBZ7
+
+test_script:
+  - npm run test
+
+after_test:
+  - ps: npm run build:webapp:prod
+  - ps: if($env:appveyor_repo_tag -eq 'True') { npm run build:win } else { echo "Not building installer because this is not a tag build" }
+
+build: off
+
+skip_branch_with_pr: true
