@@ -8,10 +8,12 @@ pull_requests:
 environment:
   GH_TOKEN:
     secure: D04x8djK8cRtoR47RIi3HC3FArLnefMpk368HefDJoVwEvYUilileOceRA6gkBZ7
-skip_non_tags: true
-image: Visual Studio 2013
-before_build:
-- ps: npm run test
-build_script:
+
+test_script:
+  - npm run test
+
+after_test:
   - ps: npm run build:webapp:prod
-  - ps: npm run build:win
+  - ps: if($env:appveyor_repo_tag -eq 'True') { npm run build:win } else { echo "Not building installer because this is not a tag build" }
+
+build: off
