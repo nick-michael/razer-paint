@@ -17,3 +17,5 @@ after_test:
   - ps: if($env:appveyor_repo_tag -eq 'True') { npm run build:win } else { echo "Not building installer because this is not a tag build" }
 
 build: off
+
+skip_branch_with_pr: true
