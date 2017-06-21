@@ -13,3 +13,6 @@ An application to paint and animate Razer Chroma keyboards, build on electron.
 - `npm run lint:fix` - Runs eslint with the fix flag
 - `npm run test` - Runs the unit tests
 - `npm run coverage-report` - Creates a coverage report in the `/coverage` directory (Must be run after the unit tests)
+
+![3016ab1313c52c8a9e23e7cfb4872181](https://user-images.githubusercontent.com/9058133/27362634-ad9cd786-5627-11e7-8f52-7ed53b75f451.gif)
+![cd03c11700197720073c5684cd9331b6](https://user-images.githubusercontent.com/9058133/27362638-b1b1c3fe-5627-11e7-8704-7970f141909e.gif)
