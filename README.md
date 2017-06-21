@@ -1,7 +1,9 @@
-# Razer Paint
+# Razer Paint 
+An application to paint and animate Razer Chroma keyboards, build on electron.
+
 <img src="https://ci.appveyor.com/api/projects/status/y9esx9gjo3v8nrre/branch/master?svg=true" alt="Project Badge" width="200">
 
-An application to paint and animate Razer Chroma keyboards, build on electron.
+<img src="https://user-images.githubusercontent.com/9058133/27386879-030286e6-568f-11e7-9955-76913f82f02e.png">
 
 ## Running The Application
 - `npm start` - Builds, watches, and starts the application in the development environment
