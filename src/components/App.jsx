@@ -9,6 +9,7 @@ import PresetColorPicker from './PresetColorPicker';
 import * as icons from '../icons/icons';
 import { version } from '../../package.json';
 import * as keyCodes from '../constants/keyCodes';
+import { keycodeToPixels } from '../utils/frame';
 import checkForUpdates from '../utils/update';
 import { handleClose, handleMinimize } from '../utils/app';
 
@@ -27,13 +28,27 @@ export default class App extends React.Component {
             }
         });
         document.addEventListener('keydown', this.handleKeyPress);
+        document.addEventListener('keyup', this.handleKeyUp);
     }
 
+    handleKeyUp = (event) => {
+        (event.code === 'CapsLock' || event.code === 'PrintScreen') && this.handleKeyPress(event);
+    };
 
     handleKeyPress = (event) => {
-        const eventString = `${event.shiftKey ? 'shift+' : ''}${event.ctrlKey ? 'ctrl+' : ''}${event.altKey ? 'alt+' : ''}${event.keyCode}`;
-        this.keyCodeActionMap()[eventString] &&
-        this.keyCodeActionMap()[eventString]();
+        if (this.props.keyboardOverride) {
+            if (!keycodeToPixels()[event.code]) return;
+            const newPixels = {};
+            for (let index = 0; index < keycodeToPixels()[event.code].length; index += 1) {
+                newPixels[keycodeToPixels()[event.code][index]] = this.props.brushColor;
+            }
+            const newFrame = Object.assign(this.props.frame, newPixels);
+            this.props.paintFrame(newFrame);
+        } else {
+            const eventString = `${event.shiftKey ? 'shift+' : ''}${event.ctrlKey ? 'ctrl+' : ''}${event.altKey ? 'alt+' : ''}${event.keyCode}`;
+            this.keyCodeActionMap()[eventString] &&
+            this.keyCodeActionMap()[eventString]();
+        }
     };
 
     paste = () => {
@@ -110,8 +125,10 @@ export default class App extends React.Component {
 }
 
 App.propTypes = {
+    keyboardOverride: PropTypes.bool.isRequired,
     brushColor: PropTypes.string.isRequired,
     setColor: PropTypes.func.isRequired,
+    frame: PropTypes.objectOf(PropTypes.string),
     clipboard: PropTypes.objectOf(PropTypes.string),
     animate: PropTypes.arrayOf(PropTypes.object).isRequired,
     presetColors: PropTypes.arrayOf(PropTypes.string).isRequired,
