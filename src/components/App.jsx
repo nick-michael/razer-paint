@@ -38,11 +38,11 @@ export default class App extends React.Component {
     handleKeyPress = (event) => {
         if (this.props.keyboardOverride) {
             if (!keycodeToPixels()[event.code]) return;
-            const newPixels = {};
+            const newFrame = Object.assign({}, this.props.frame);
             for (let index = 0; index < keycodeToPixels()[event.code].length; index += 1) {
-                newPixels[keycodeToPixels()[event.code][index]] = this.props.brushColor;
+                newFrame[keycodeToPixels()[event.code][index]] = this.props.brushColor;
             }
-            const newFrame = Object.assign(this.props.frame, newPixels);
+            this.props.keyframe();
             this.props.paintFrame(newFrame);
         } else {
             const eventString = `${event.shiftKey ? 'shift+' : ''}${event.ctrlKey ? 'ctrl+' : ''}${event.altKey ? 'alt+' : ''}${event.keyCode}`;
