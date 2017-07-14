@@ -6,9 +6,19 @@ import * as frameActions from '../actions/frameActions';
 import App from '../components/App';
 
 const mapStateToProps = (state) => {
-    const { brushColor, presetColors } = state.canvas;
-    const { animate, selectedFrame, isPlaying, clipboard } = state.frames;
-    return { brushColor, presetColors, animate, selectedFrame, isPlaying, clipboard };
+    const { tool, brushColor, presetColors, keyboardOverride } = state.canvas;
+    const { frame, animate, selectedFrame, isPlaying, clipboard } = state.frames;
+    return {
+        tool,
+        brushColor,
+        presetColors,
+        keyboardOverride,
+        frame,
+        animate,
+        selectedFrame,
+        isPlaying,
+        clipboard,
+    };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(

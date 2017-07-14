@@ -18,6 +18,7 @@ describe('Toolbar Component', () => {
 
         toolbar = shallow(
             <Toolbar
+              keyboardOverride={false}
               tool={tools.BRUSH}
               canUndo={false}
               canRedo={false}
@@ -26,6 +27,7 @@ describe('Toolbar Component', () => {
               fps={30}
               animate={[{}, {}]}
               clipboard={{ 0: 'clpbrd' }}
+              toggleKeyboardOverride={sandbox.stub()}
               copy={sandbox.stub()}
               paste={sandbox.stub()}
               undo={sandbox.stub()}
@@ -189,13 +191,45 @@ describe('Toolbar Component', () => {
         });
     });
 
+    describe('keys', () => {
+        let keys;
+        beforeEach(() => {
+            keys = toolbar.find('.toolbar-item').at(4);
+        });
+
+        it('should render the keys tool at index 4', () => {
+            expect(keys.find(icons.Keys).length).to.equal(1);
+        });
+
+        it('should have a tooltip', () => {
+            const tooltip = keys.find('.tooltip');
+            expect(tooltip.length).to.equal(1);
+            expect(tooltip.text()).to.equal('Keyboard Paint');
+        });
+
+        it('should toggle keyboard override on click', () => {
+            keys.prop('onClick')();
+            sinon.assert.calledOnce(toolbar.instance().props.toggleKeyboardOverride);
+        });
+
+        it('should set classname to selected if keyboardOverride is true', () => {
+            toolbar.setProps({ keyboardOverride: true });
+            keys = toolbar.find('.toolbar-item').at(4);
+            expect(keys.find('.toolbar-item-icon__selected').length).to.equal(1);
+        });
+
+        it('should set classname to available if keyboardOverride is false', () => {
+            expect(keys.find('.toolbar-item-icon__available').length).to.equal(1);
+        });
+    });
+
     describe('undo', () => {
         let undo;
         beforeEach(() => {
-            undo = toolbar.find('.toolbar-item').at(4);
+            undo = toolbar.find('.toolbar-item').at(5);
         });
 
-        it('should render undo at index 4', () => {
+        it('should render undo at index 5', () => {
             expect(undo.find(icons.Undo).length).to.equal(1);
         });
 
@@ -211,7 +245,7 @@ describe('Toolbar Component', () => {
 
         it('should undo on click if canUndo', () => {
             toolbar.setProps({ canUndo: true });
-            undo = toolbar.find('.toolbar-item').at(4);
+            undo = toolbar.find('.toolbar-item').at(5);
             undo.prop('onClick')();
             sinon.assert.calledOnce(toolbar.instance().props.undo);
         });
@@ -223,7 +257,7 @@ describe('Toolbar Component', () => {
 
         it('should have `__available` modifier if canUndo', () => {
             toolbar.setProps({ canUndo: true });
-            undo = toolbar.find('.toolbar-item').at(4);
+            undo = toolbar.find('.toolbar-item').at(5);
             expect(undo.find('.toolbar-item-icon__available').length).to.equal(1);
         });
 
@@ -235,10 +269,10 @@ describe('Toolbar Component', () => {
     describe('redo', () => {
         let redo;
         beforeEach(() => {
-            redo = toolbar.find('.toolbar-item').at(5);
+            redo = toolbar.find('.toolbar-item').at(6);
         });
 
-        it('should render redo at index 5', () => {
+        it('should render redo at index 6', () => {
             expect(redo.find(icons.Redo).length).to.equal(1);
         });
 
@@ -254,7 +288,7 @@ describe('Toolbar Component', () => {
 
         it('should redo on click if canRedo', () => {
             toolbar.setProps({ canRedo: true });
-            redo = toolbar.find('.toolbar-item').at(5);
+            redo = toolbar.find('.toolbar-item').at(6);
             redo.prop('onClick')();
             sinon.assert.calledOnce(toolbar.instance().props.redo);
         });
@@ -266,7 +300,7 @@ describe('Toolbar Component', () => {
 
         it('should have `__available` modifier if canRedo', () => {
             toolbar.setProps({ canRedo: true });
-            redo = toolbar.find('.toolbar-item').at(5);
+            redo = toolbar.find('.toolbar-item').at(6);
             expect(redo.find('.toolbar-item-icon__available').length).to.equal(1);
         });
 
@@ -278,10 +312,10 @@ describe('Toolbar Component', () => {
     describe('copy', () => {
         let copy;
         beforeEach(() => {
-            copy = toolbar.find('.toolbar-item').at(6);
+            copy = toolbar.find('.toolbar-item').at(7);
         });
 
-        it('should render copy at index 6', () => {
+        it('should render copy at index 7', () => {
             expect(copy.find(icons.Copy).length).to.equal(1);
         });
 
@@ -308,10 +342,10 @@ describe('Toolbar Component', () => {
     describe('paste', () => {
         let paste;
         beforeEach(() => {
-            paste = toolbar.find('.toolbar-item').at(7);
+            paste = toolbar.find('.toolbar-item').at(8);
         });
 
-        it('should render paste at index 7', () => {
+        it('should render paste at index 8', () => {
             expect(paste.find(icons.Paste).length).to.equal(1);
         });
 
@@ -343,7 +377,7 @@ describe('Toolbar Component', () => {
 
         it('should not have `__available` modifier if nothing is in the clipboard', () => {
             toolbar.setProps({ clipboard: null });
-            paste = toolbar.find('.toolbar-item').at(7);
+            paste = toolbar.find('.toolbar-item').at(8);
             expect(paste.find('.toolbar-item-icon__available').length).to.equal(0);
         });
     });
@@ -351,10 +385,10 @@ describe('Toolbar Component', () => {
     describe('capture', () => {
         let capture;
         beforeEach(() => {
-            capture = toolbar.find('.toolbar-item').at(8);
+            capture = toolbar.find('.toolbar-item').at(9);
         });
 
-        it('should render capture at index 8', () => {
+        it('should render capture at index 9', () => {
             expect(capture.find(icons.Capture).length).to.equal(1);
         });
 
@@ -381,10 +415,10 @@ describe('Toolbar Component', () => {
     describe('edit', () => {
         let edit;
         beforeEach(() => {
-            edit = toolbar.find('.toolbar-item').at(9);
+            edit = toolbar.find('.toolbar-item').at(10);
         });
 
-        it('should render edit at index 9', () => {
+        it('should render edit at index 10', () => {
             expect(edit.find(icons.Edit).length).to.equal(1);
         });
 
@@ -409,7 +443,7 @@ describe('Toolbar Component', () => {
 
         it('should have `__selected` modifier if editing', () => {
             toolbar.setProps({ isEditing: true });
-            edit = toolbar.find('.toolbar-item').at(9);
+            edit = toolbar.find('.toolbar-item').at(10);
             expect(edit.find('.toolbar-item-icon__selected').length).to.equal(1);
         });
     });
@@ -417,10 +451,10 @@ describe('Toolbar Component', () => {
     describe('insert', () => {
         let insert;
         beforeEach(() => {
-            insert = toolbar.find('.toolbar-item').at(10);
+            insert = toolbar.find('.toolbar-item').at(11);
         });
 
-        it('should render insert at index 10', () => {
+        it('should render insert at index 11', () => {
             expect(insert.find(icons.Insert).length).to.equal(1);
         });
 
@@ -452,7 +486,7 @@ describe('Toolbar Component', () => {
 
         it('should not have `__available` modifier if no frame is selected', () => {
             toolbar.setProps({ selectedFrame: null });
-            insert = toolbar.find('.toolbar-item').at(10);
+            insert = toolbar.find('.toolbar-item').at(11);
             expect(insert.find('.toolbar-item-icon__available').length).to.equal(0);
         });
     });
@@ -460,10 +494,10 @@ describe('Toolbar Component', () => {
     describe('deleteFrame', () => {
         let deleteFrame;
         beforeEach(() => {
-            deleteFrame = toolbar.find('.toolbar-item').at(11);
+            deleteFrame = toolbar.find('.toolbar-item').at(12);
         });
 
-        it('should render delete at index 11', () => {
+        it('should render delete at index 12', () => {
             expect(deleteFrame.find(icons.Trashcan).length).to.equal(1);
         });
 
@@ -484,7 +518,7 @@ describe('Toolbar Component', () => {
 
         it('should not deleteFrameFrame on click if no frame is selected', () => {
             toolbar.setProps({ selectedFrame: null });
-            deleteFrame = toolbar.find('.toolbar-item').at(11);
+            deleteFrame = toolbar.find('.toolbar-item').at(12);
             deleteFrame.prop('onClick')();
             sinon.assert.notCalled(toolbar.instance().props.deleteFrame);
         });
@@ -495,7 +529,7 @@ describe('Toolbar Component', () => {
 
         it('should not have `__available` modifier if no frame is selected', () => {
             toolbar.setProps({ selectedFrame: null });
-            deleteFrame = toolbar.find('.toolbar-item').at(11);
+            deleteFrame = toolbar.find('.toolbar-item').at(12);
             expect(deleteFrame.find('.toolbar-item-icon__available').length).to.equal(0);
         });
     });
@@ -503,10 +537,10 @@ describe('Toolbar Component', () => {
     describe('save', () => {
         let save;
         beforeEach(() => {
-            save = toolbar.find('.toolbar-item').at(12);
+            save = toolbar.find('.toolbar-item').at(13);
         });
 
-        it('should render save at index 12', () => {
+        it('should render save at index 13', () => {
             expect(save.find(icons.Save).length).to.equal(1);
         });
 
@@ -533,10 +567,10 @@ describe('Toolbar Component', () => {
     describe('open', () => {
         let open;
         beforeEach(() => {
-            open = toolbar.find('.toolbar-item').at(13);
+            open = toolbar.find('.toolbar-item').at(14);
         });
 
-        it('should render open at index 13', () => {
+        it('should render open at index 14', () => {
             expect(open.find(icons.Open).length).to.equal(1);
         });
 
@@ -564,10 +598,10 @@ describe('Toolbar Component', () => {
         describe('Play (isPlaying=false)', () => {
             let play;
             beforeEach(() => {
-                play = toolbar.find('.toolbar-item').at(14);
+                play = toolbar.find('.toolbar-item').at(15);
             });
 
-            it('should render play at index 14', () => {
+            it('should render play at index 15', () => {
                 expect(play.find(icons.Play).length).to.equal(1);
             });
 
@@ -588,7 +622,7 @@ describe('Toolbar Component', () => {
 
             it('should not play on click if there are not animation frames', () => {
                 toolbar.setProps({ animate: [] });
-                play = toolbar.find('.toolbar-item').at(14);
+                play = toolbar.find('.toolbar-item').at(15);
                 play.prop('onClick')();
                 sinon.assert.notCalled(toolbar.instance().props.playAnimation);
             });
@@ -599,7 +633,7 @@ describe('Toolbar Component', () => {
 
             it('should not have `__available` modifier if there are no animation frames', () => {
                 toolbar.setProps({ animate: [] });
-                play = toolbar.find('.toolbar-item').at(14);
+                play = toolbar.find('.toolbar-item').at(15);
                 expect(play.find('.toolbar-item-icon__available').length).to.equal(0);
             });
         });
@@ -608,10 +642,10 @@ describe('Toolbar Component', () => {
             let pause;
             beforeEach(() => {
                 toolbar.setProps({ isPlaying: true });
-                pause = toolbar.find('.toolbar-item').at(14);
+                pause = toolbar.find('.toolbar-item').at(15);
             });
 
-            it('should render play at index 14', () => {
+            it('should render play at index 15', () => {
                 expect(pause.find(icons.Pause).length).to.equal(1);
             });
 
@@ -639,7 +673,7 @@ describe('Toolbar Component', () => {
     describe('reverse', () => {
         let reverse;
         beforeEach(() => {
-            reverse = toolbar.find('.toolbar-item').at(15);
+            reverse = toolbar.find('.toolbar-item').at(16);
         });
 
         it('should render reverse at index 15', () => {
@@ -667,7 +701,7 @@ describe('Toolbar Component', () => {
 
         it('should have `__selected` modifier if isReversed', () => {
             toolbar.setProps({ isReversed: true });
-            reverse = toolbar.find('.toolbar-item').at(15);
+            reverse = toolbar.find('.toolbar-item').at(16);
             expect(reverse.find('.toolbar-item-icon__selected').length).to.equal(1);
         });
     });

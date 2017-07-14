@@ -33,6 +33,12 @@ const Toolbar = props => (
                     <icons.Bucket />
                 </div>
             </div>
+            <div className="toolbar-item" onClick={props.toggleKeyboardOverride}>
+                <div className="tooltip">Keyboard Paint</div>
+                <div className={`toolbar-item-icon toolbar-item-icon__${props.keyboardOverride ? 'selected' : 'available'}`}>
+                    <icons.Keys />
+                </div>
+            </div>
             <div className="toolbar-spacer" />
             <div className="toolbar-item toolbar-item-can-disable" onClick={() => props.canUndo && props.undo()}>
                 <div className="tooltip">Undo</div>
@@ -130,6 +136,7 @@ const Toolbar = props => (
 );
 
 Toolbar.propTypes = {
+    keyboardOverride: PropTypes.bool.isRequired,
     tool: PropTypes.string.isRequired,
     canUndo: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,
@@ -138,6 +145,7 @@ Toolbar.propTypes = {
     fps: PropTypes.number.isRequired,
     animate: PropTypes.arrayOf(PropTypes.object).isRequired,
     clipboard: PropTypes.objectOf(PropTypes.string),
+    toggleKeyboardOverride: PropTypes.func.isRequired,
     copy: PropTypes.func.isRequired,
     paste: PropTypes.func.isRequired,
     undo: PropTypes.func.isRequired,

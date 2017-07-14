@@ -14,7 +14,7 @@ export const setCount = (number) => {
 };
 
 const mapStateToProps = (state) => {
-    const { tool } = state.canvas;
+    const { tool, keyboardOverride } = state.canvas;
     const {
         frame,
         frames,
@@ -33,6 +33,7 @@ const mapStateToProps = (state) => {
     const saveState = { frame, animate, fps };
     return {
         tool,
+        keyboardOverride,
         canUndo,
         canRedo,
         animate,

@@ -14,3 +14,7 @@ export const setColor = color => ({
     type: types.SET_COLOR,
     payload: color,
 });
+
+export const toggleKeyboardOverride = () => ({
+    type: types.TOGGLE_KEYBOARD_OVERRIDE,
+});
