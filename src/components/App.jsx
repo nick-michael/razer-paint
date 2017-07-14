@@ -9,6 +9,7 @@ import PresetColorPicker from './PresetColorPicker';
 import * as icons from '../icons/icons';
 import { version } from '../../package.json';
 import * as keyCodes from '../constants/keyCodes';
+import { ERASER } from '../constants/tools';
 import { keycodeToPixels } from '../utils/frame';
 import checkForUpdates from '../utils/update';
 import { handleClose, handleMinimize } from '../utils/app';
@@ -40,7 +41,7 @@ export default class App extends React.Component {
             if (!keycodeToPixels()[event.code]) return;
             const newFrame = Object.assign({}, this.props.frame);
             for (let index = 0; index < keycodeToPixels()[event.code].length; index += 1) {
-                newFrame[keycodeToPixels()[event.code][index]] = this.props.brushColor;
+                newFrame[keycodeToPixels()[event.code][index]] = this.props.tool === ERASER ? '000000' : this.props.brushColor;
             }
             this.props.keyframe();
             this.props.paintFrame(newFrame);
