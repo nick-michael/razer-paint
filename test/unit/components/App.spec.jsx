@@ -7,6 +7,8 @@ import * as updateUtils from '../../../src/utils/update';
 import { version } from '../../../package.json';
 import * as keyCodes from '../../../src/constants/keyCodes';
 
+const { setPlatform } = window.require('os');
+
 describe('App Component', () => {
     const sandbox = sinon.sandbox.create();
     let mountApp;
@@ -68,6 +70,24 @@ describe('App Component', () => {
     it('should set up keydown listener on mount', () => {
         mountApp();
         sinon.assert.calledWithExactly(eventListenerStub, 'keydown', sinon.match.func);
+    });
+
+    it('should get correct darwin class names', () => {
+        setPlatform('darwin');
+        mountApp();
+        expect(app.find('.button-container__win').length).to.equal(0);
+        expect(app.find('.button__win').length).to.equal(0);
+        expect(app.find('.button-close__win').length).to.equal(0);
+        expect(app.find('.button-minimize__win').length).to.equal(0);
+    });
+
+    it.only('should get correct windows class names', () => {
+        setPlatform('win32');
+        mountApp();
+        expect(app.find('.button-container__win').length).to.equal(1);
+        expect(app.find('.button__win').length).to.equal(2);
+        expect(app.find('.button-close__win').length).to.equal(1);
+        expect(app.find('.button-minimize__win').length).to.equal(1);
     });
 
     describe('handleKeyPress', () => {

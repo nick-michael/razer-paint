@@ -10,7 +10,9 @@ import * as icons from '../icons/icons';
 import { version } from '../../package.json';
 import * as keyCodes from '../constants/keyCodes';
 import checkForUpdates from '../utils/update';
-import { getFloat, handleClose, handleMinimize } from '../utils/app';
+import { handleClose, handleMinimize } from '../utils/app';
+
+const { platform } = window.require('os');
 
 export default class App extends React.Component {
     constructor(props) {
@@ -70,11 +72,11 @@ export default class App extends React.Component {
             <div className="page">
                 <div className="topBar">
                     <span className="label">Razer Paint</span>
-                    <span className="button-container" style={{ float: getFloat() }}>
-                        <span className="button button-close" style={{ float: getFloat() }} onClick={handleClose}>
+                    <span className={`button-container ${platform() === 'darwin' ? '' : 'button-container__win'}`}>
+                        <span className={`button button-close ${platform() === 'darwin' ? '' : 'button__win button-close__win'}`} onClick={handleClose}>
                             <div className="button-icon"><icons.Close /></div>
                         </span>
-                        <span className="button button-minimize" style={{ float: getFloat() }} onClick={handleMinimize}>
+                        <span className={`button button-minimize ${platform() === 'darwin' ? '' : 'button__win button-minimize__win'}`} onClick={handleMinimize}>
                             <div className="button-icon"><icons.Minimize /></div>
                         </span>
                     </span>

@@ -17,11 +17,18 @@
     }
 
     .button-container {
+        float: left;
         padding: 0 10px;
         height: 24px;
 
+        &__win {
+            float: right;
+            padding: 0px;
+        }
+
         .button {
             display: flex;
+            float: left;
             align-items: center;
             justify-content: center;
             -webkit-app-region: no-drag;
@@ -29,6 +36,14 @@
             height: 14px;
             border-radius: 7px;
             margin: 5px 2px;
+            
+            &__win {
+                float: right;
+                width: 34px;
+                height: 24px;
+                border-radius: 0px;
+                margin: 0px;
+            }
         }
 
         .button-icon {
@@ -44,12 +59,32 @@
             }
         }
 
+        .button-close__win {
+            background: none;
+            fill: #FFF;
+
+            &:hover {
+                background: #E81123;
+                fill: #FFF;
+            }
+        }
+
         .button-minimize {
             background: #FFC430;
             fill: #FFC430;
 
             &:hover {
                 fill: #BF9400
+            }
+        }
+
+        .button-minimize__win {
+            background: none;
+            fill: #FFF;
+
+            &:hover {
+                background: $color-dark-grey;
+                fill: #FFF;
             }
         }
 
