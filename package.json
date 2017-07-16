@@ -1,7 +1,7 @@
 {
   "name": "razer-paint",
   "productName": "Razer Paint",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Razer Paint For Chroma",
   "author": "Nick Michael",
   "main": "main.js",
